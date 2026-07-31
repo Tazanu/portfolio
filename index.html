@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tazanu Stanley — Software Engineer</title>
+<meta name="description" content="Portfolio of Tazanu Stanley, software & web developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     EDIT ME: change --accent colors here if you want a different
+     palette. Everything derives from these tokens.
+     ============================================================ */
+  :root{
+    --bg: #080C10;
+    --bg-alt: #0B1018;
+    --surface: #0F1720;
+    --surface-2: #131E28;
+    --grid-line: rgba(94, 234, 212, 0.06);
+    --border: #1E2D3D;
+    --text: #E6EDF3;
+    --text-muted: #8B98A5;
+    --text-dim: #5C6773;
+    --teal: #5EEAD4;
+    --teal-dim: rgba(94, 234, 212, 0.14);
+    --teal-glow: rgba(94, 234, 212, 0.25);
+    --amber: #F0A868;
+    --amber-dim: rgba(240, 168, 104, 0.14);
+    --amber-glow: rgba(240, 168, 104, 0.22);
+    --purple: #A78BFA;
+    --purple-dim: rgba(167, 139, 250, 0.12);
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+    --radius: 6px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* glowing orbs */
+  body::before, body::after{
+    content:''; position:fixed; border-radius:50%; pointer-events:none; z-index:0;
+    filter:blur(80px); opacity:0.18;
+  }
+  body::before{
+    width:600px; height:600px; top:-100px; left:-150px;
+    background:radial-gradient(circle, var(--teal), transparent 70%);
+    animation:orbDrift1 12s ease-in-out infinite;
+  }
+  body::after{
+    width:500px; height:500px; bottom:-80px; right:-100px;
+    background:radial-gradient(circle, var(--amber), transparent 70%);
+    animation:orbDrift2 14s ease-in-out infinite;
+  }
+  @keyframes orbDrift1{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,40px);}}
+  @keyframes orbDrift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,-30px);}}
+
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--teal); color:#04140F;}
+
+  :focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(8,12,16,0.88);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 1px 30px rgba(94,234,212,0.06);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:1080px; margin:0 auto;
+  }
+  .logo{
+    font-family:var(--mono); font-size:14px; color:var(--teal); font-weight:600;
+    display:flex; align-items:center; gap:6px;
+  }
+  .logo .cursor{
+    display:inline-block; width:7px; height:14px; background:var(--teal);
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:13px;}
+  nav.links a{color:var(--text-muted); transition:color .2s; position:relative;}
+  nav.links a::after{content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--teal); transition:width .2s;}
+  nav.links a:hover{color:var(--teal);}
+  nav.links a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:1px solid var(--border); color:var(--text); font-family:var(--mono); padding:6px 10px; border-radius:var(--radius);}
+
+  @media (max-width:720px){
+    nav.links{display:none;}
+    .nav-toggle{display:block;}
+    nav.links.open{
+      display:flex; flex-direction:column; position:absolute; top:60px; left:0; right:0;
+      background:var(--bg-alt); padding:20px 28px; border-bottom:1px solid var(--border); gap:16px;
+    }
+  }
+
+  /* ---------- HERO JUMBOTRON ---------- */
+  .hero{
+    position:relative; width:100vw; left:50%; right:50%;
+    margin-left:-50vw; margin-right:-50vw;
+    height:92vh; min-height:560px; overflow:hidden;
+    display:flex; align-items:flex-end; border-top:none;
+    padding:0; margin-top:0;
+  }
+  .hero-bg{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:contain; object-position:right center;
+    background:#0B0F14;
+    animation:imgFloat 6s ease-in-out infinite;
+  }
+  @keyframes imgFloat{
+    0%,100%{transform:translateY(0px) scale(1);}
+    50%{transform:translateY(-12px) scale(1.02);}
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(
+      120deg,
+      rgba(8,12,16,0.92) 0%,
+      rgba(8,12,16,0.75) 45%,
+      rgba(94,234,212,0.04) 70%,
+      rgba(8,12,16,0.55) 100%
+    ),
+    linear-gradient(to bottom, rgba(8,12,16,0.3) 0%, rgba(8,12,16,0.95) 100%);
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    width:100%; max-width:1080px; margin:0 auto;
+    padding:0 28px 64px;
+    display:flex; flex-direction:column; align-items:flex-start;
+    justify-content:flex-end;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--amber);
+    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .eyebrow::before{content:"●"; font-size:8px; color:var(--amber); animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hero h1{
+    font-family:var(--mono); font-weight:700; font-size:clamp(18px, 2.8vw, 34px);
+    line-height:1.3; letter-spacing:-0.01em; max-width:820px;
+    text-shadow:0 2px 24px rgba(0,0,0,0.6);
+  }
+  .hero h1 .kw{color:var(--teal);}
+  .hero h1 .str{color:var(--amber);}
+  .hero h1 .punc{color:rgba(255,255,255,0.4);}
+  .hero-sub{
+    margin-top:16px; max-width:560px; color:rgba(230,237,243,0.85); font-size:15px; line-height:1.75;
+    text-shadow:0 1px 8px rgba(0,0,0,0.5);
+  }
+  .hero-cta{margin-top:24px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; padding:12px 20px; border-radius:var(--radius);
+    border:1px solid var(--border); transition:all .15s; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--teal); color:#04140F; border-color:var(--teal); font-weight:600;}
+  .btn-primary:hover{background:#7FF0DE;}
+  .btn-ghost{color:#fff; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.3); backdrop-filter:blur(4px);}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:70px 0; border-top:1px solid var(--border);}
+  .section-tag{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:.08em;
+    text-transform:uppercase; margin-bottom:10px;
+  }
+  .section-title{
+    font-family:var(--mono); font-size:24px; font-weight:600; margin-bottom:36px; text-align:left;
+    background:linear-gradient(90deg, var(--text) 60%, var(--teal));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .section-title .punc{color:var(--teal); -webkit-text-fill-color:var(--teal);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:180px 1.3fr 1fr; gap:40px; align-items:start;}
+  @media (max-width:900px){.about-grid{grid-template-columns:140px 1fr;}}
+  @media (max-width:600px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--text-muted); margin-bottom:16px; max-width:52ch; line-height:1.8; text-align:left;}
+  .about-photo-wrap{position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:6px; border:1px solid var(--border); box-shadow:0 0 30px var(--teal-glow), 4px 4px 0 var(--teal-dim);}
+  .about-photo{width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform .4s;}
+  .about-photo-wrap:hover .about-photo{transform:scale(1.04);}
+  .facts{
+    font-family:var(--mono); font-size:13px; background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius); padding:20px;
+    align-self:start;
+    box-shadow:0 0 24px rgba(94,234,212,0.08);
+    transition:box-shadow .3s;
+  }
+  .facts:hover{box-shadow:0 0 36px var(--teal-glow);}
+  .facts .row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--border);}
+  .facts .row:last-child{border-bottom:none;}
+  .facts .k{color:var(--text-dim);}
+  .facts .v{color:var(--teal);}
+
+  /* ---------- SKILLS ---------- */
+  .skills{font-family:var(--mono); font-size:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 28px; overflow-x:auto;}
+  .skills .line{white-space:pre; line-height:1.9;}
+  .skills .kw{color:var(--teal);}
+  .skills .punc{color:var(--text-dim);}
+  .skills .mod{color:var(--amber);}
+  .skills .comment{color:var(--text-dim); font-style:italic;}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  @media (max-width:800px){.projects{grid-template-columns:1fr;}}
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; transition:border-color .2s, transform .2s, box-shadow .2s;
+    position:relative;
+  }
+  .card::before{
+    content:''; position:absolute; inset:0; opacity:0;
+    background:linear-gradient(135deg, var(--teal-dim), var(--purple-dim));
+    transition:opacity .3s; pointer-events:none;
+  }
+  .card:hover{border-color:var(--teal); transform:translateY(-4px); box-shadow:0 8px 32px var(--teal-glow);}
+  .card:hover::before{opacity:1;}
+  .card-tab{
+    display:flex; align-items:center; gap:8px; padding:10px 14px;
+    background:var(--surface-2); border-bottom:1px solid var(--border);
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+  }
+  .card-tab .dot{width:8px; height:8px; border-radius:50%; background:var(--text-dim);}
+  .card-body{padding:22px;}
+  .card-body h3{font-size:17px; margin-bottom:10px; font-weight:600;}
+  .card-body p{color:var(--text-muted); font-size:14px; margin-bottom:18px; line-height:1.7; text-align:left;}
+  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .tag{font-family:var(--mono); font-size:11px; color:var(--amber); background:var(--amber-dim); padding:3px 9px; border-radius:20px; border:1px solid rgba(240,168,104,0.2); transition:background .2s;}
+  .tag:hover{background:rgba(240,168,104,0.28);}
+  .card-links{display:flex; gap:16px; font-family:var(--mono); font-size:12px;}
+  .card-links a{color:var(--teal); border-bottom:1px solid transparent;}
+  .card-links a:hover{border-color:var(--teal);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-box{
+    background:linear-gradient(135deg, var(--surface) 60%, rgba(94,234,212,0.05));
+    border:1px solid var(--border); border-radius:var(--radius);
+    padding:36px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+    box-shadow:0 0 40px rgba(94,234,212,0.07);
+  }
+  .contact-box h2{font-family:var(--mono); font-size:20px; margin-bottom:8px;}
+  .contact-box p{color:var(--text-muted); font-size:14px;}
+  .social{display:flex; gap:14px; font-family:var(--mono); font-size:13px;}
+  .social a{border:1px solid var(--border); padding:9px 16px; border-radius:var(--radius); transition:.2s;}
+  .social a:hover{border-color:var(--teal); color:var(--teal); box-shadow:0 0 14px var(--teal-glow); background:var(--teal-dim);}
+
+  footer{
+    padding:30px 0; font-family:var(--mono); font-size:12px; color:var(--text-dim); text-align:center;
+    border-top:1px solid var(--border);
+    background:linear-gradient(to right, transparent, rgba(94,234,212,0.04), transparent);
+  }
+
+  /* ---------- ANIMATIONS ---------- */
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(28px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+  }
+  .reveal{opacity:0;}
+  .reveal.visible{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) forwards;}
+  .reveal-fade.visible{animation:fadeIn .7s ease forwards;}
+  .delay-1{animation-delay:.1s;}
+  .delay-2{animation-delay:.2s;}
+  .delay-3{animation-delay:.3s;}
+  .delay-4{animation-delay:.4s;}
+
+  /* ---------- CHAT WIDGET ---------- */
+  #chat-toggle{
+    position:fixed; bottom:24px; right:24px; z-index:60;
+    width:54px; height:54px; border-radius:50%;
+    background:linear-gradient(135deg, var(--teal), #38bfa8); color:#04140F; border:none; cursor:pointer;
+    font-family:var(--mono); font-size:20px; font-weight:700;
+    box-shadow:0 6px 28px rgba(94,234,212,0.4);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s, box-shadow .15s;
+  }
+  #chat-toggle:hover{transform:scale(1.08); box-shadow:0 8px 36px rgba(94,234,212,0.6);}
+
+  #chat-panel{
+    position:fixed; bottom:90px; right:24px; z-index:60;
+    width:340px; max-width:calc(100vw - 32px); height:440px; max-height:calc(100vh - 130px);
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px;
+    display:none; flex-direction:column; overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  #chat-panel.open{display:flex;}
+  .chat-head{
+    background:var(--surface-2); padding:10px 14px; border-bottom:1px solid var(--border);
+    font-family:var(--mono); font-size:12px; color:var(--text-muted);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .chat-head span.title{color:var(--teal);}
+  .chat-head button{background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:14px;}
+  #chat-log{flex:1; overflow-y:auto; padding:14px; font-family:var(--mono); font-size:13px; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:88%; padding:9px 12px; border-radius:6px; line-height:1.5;}
+  .msg.bot{background:var(--surface); align-self:flex-start; border:1px solid var(--border);}
+  .msg.user{background:var(--teal-dim); color:var(--teal); align-self:flex-end;}
+  .msg.err{background:rgba(240,100,100,.1); color:#F08080; align-self:flex-start; border:1px solid rgba(240,100,100,.25);}
+  #chat-form{display:flex; border-top:1px solid var(--border);}
+  #chat-input{
+    flex:1; background:transparent; border:none; color:var(--text); padding:12px 14px;
+    font-family:var(--mono); font-size:13px;
+  }
+  #chat-input:focus{outline:none;}
+  #chat-form button{
+    background:var(--teal); color:#04140F; border:none; padding:0 16px; font-family:var(--mono); font-weight:600; cursor:pointer;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="logo">~/tazanu<span class="cursor"></span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">menu</button>
+    <nav class="links" id="navLinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <img src="1760965739354.jpg" alt="" class="hero-bg" aria-hidden="true">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <p class="eyebrow reveal delay-1">open to new opportunities</p>
+      <h1 class="reveal delay-2">
+        <span class="kw">const</span> developer <span class="punc">=</span> {<br>
+        &nbsp;&nbsp;name<span class="punc">:</span> <span class="str">"Tazanu Stanley"</span>,<br>
+        &nbsp;&nbsp;role<span class="punc">:</span> <span class="str">"Software &amp; Web Developer"</span>,<br>
+        &nbsp;&nbsp;focus<span class="punc">:</span> <span class="str">"full-stack, dev tools, AI integrations"</span><br>
+        }
+      </h1>
+      <p class="hero-sub reveal delay-3">I build fast, reliable web applications end to end, from
+        backend APIs to interfaces people actually enjoy using. Currently building
+        with TypeScript, React, and Node, and experimenting with LLM-powered features.</p>
+      <div class="hero-cta reveal delay-4">
+        <a href="#projects" class="btn btn-primary">view projects →</a>
+        <a href="#contact" class="btn btn-ghost">get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="section-tag">01</p>
+    <h2 class="section-title">about<span class="punc">()</span></h2>
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal reveal-fade"><img src="1760965739354.jpg" alt="Tazanu Stanley" class="about-photo"></div>
+      <div class="reveal delay-1">
+        <p>I'm a software developer focused on building clean, maintainable products
+          from prototyping an idea to shipping it in production. I care about
+          fast load times, accessible interfaces, and code that the next person
+          (often future-me) can actually read.</p>
+        <p>Outside of client work, I contribute to a couple of open-source tools
+          and I'm currently exploring how small, well-scoped AI features can make
+          software genuinely more useful, not just decorative.</p>
+      </div>
+      <div class="facts reveal delay-2">
+        <div class="row"><span class="k">location</span><span class="v">Remote / Open to relocate</span></div>
+        <div class="row"><span class="k">experience</span><span class="v">4+ years</span></div>
+        <div class="row"><span class="k">stack</span><span class="v">TS · React · Node</span></div>
+        <div class="row"><span class="k">status</span><span class="v">Available for work</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="section-tag">02</p>
+    <h2 class="section-title">skills<span class="punc">.ts</span></h2>
+    <div class="skills reveal">
+      <div class="line"><span class="comment">// languages</span></div>
+      <div class="line"><span class="kw">import</span> { <span class="mod">TypeScript, JavaScript, Python, SQL</span> } <span class="kw">from</span> <span class="mod">'languages'</span><span class="punc">;</span></div>
+      <div class="line"><span class="comment">// frontend</span></div>
+      <div class="line"><span class="kw">import</span> { <span class="mod">React, Next.js, Tailwind CSS</span> } <span class="kw">from</span> <span class="mod">'frontend'</span><span class="punc">;</span></div>
+      <div class="line"><span class="comment">// backend</span></div>
+      <div class="line"><span class="kw">import</span> { <span class="mod">Node.js, Express, PostgreSQL, REST, GraphQL</span> } <span class="kw">from</span> <span class="mod">'backend'</span><span class="punc">;</span></div>
+      <div class="line"><span class="comment">// tooling</span></div>
+      <div class="line"><span class="kw">import</span> { <span class="mod">Docker, Git, CI/CD, Vercel, AWS</span> } <span class="kw">from</span> <span class="mod">'tooling'</span><span class="punc">;</span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="section-tag">03</p>
+    <h2 class="section-title">projects<span class="punc">.map()</span></h2>
+    <div class="projects">
+
+      <div class="card reveal delay-1">
+        <div class="card-tab"><span class="dot"></span> studyhub</div>
+        <div class="card-body">
+          <h3>StudyHub</h3>
+          <p>A peer to peer e-learning platform where students interact, collaborate, and learn together in real time.</p>
+          <div class="tags"><span class="tag">E-Learning</span><span class="tag">Real-time</span><span class="tag">Vercel</span></div>
+          <div class="card-links"><a href="https://studyhubwebapp.vercel.app" target="_blank">live ↗</a></div>
+        </div>
+      </div>
+
+      <div class="card reveal delay-2">
+        <div class="card-tab"><span class="dot"></span> flowboard</div>
+        <div class="card-body">
+          <h3>Flowboard</h3>
+          <p>A lightweight kanban-style task manager with real-time sync
+            across devices, built to replace a clunky internal spreadsheet.</p>
+          <div class="tags"><span class="tag">React</span><span class="tag">WebSockets</span><span class="tag">Redis</span></div>
+          <div class="card-links"><a href="#">live ↗</a><a href="#">code ↗</a></div>
+        </div>
+      </div>
+
+      <div class="card reveal delay-3">
+        <div class="card-tab"><span class="dot"></span> gateway-cli</div>
+        <div class="card-body">
+          <h3>Gateway CLI</h3>
+          <p>A command-line tool that scaffolds and deploys API gateways
+            with sensible defaults, cutting new-service setup from hours to minutes.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Docker</span><span class="tag">AWS</span></div>
+          <div class="card-links"><a href="#">live ↗</a><a href="#">code ↗</a></div>
+        </div>
+      </div>
+
+      <div class="card reveal delay-4">
+        <div class="card-tab"><span class="dot"></span> this-site</div>
+        <div class="card-body">
+          <h3>This Portfolio</h3>
+          <p>The site you're on right now, a single-file, dependency-light
+            build with a small AI assistant wired up through a serverless proxy.</p>
+          <div class="tags"><span class="tag">HTML/CSS/JS</span><span class="tag">NVIDIA NIM</span></div>
+          <div class="card-links"><a href="#">code ↗</a></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="section-tag">04</p>
+    <h2 class="section-title">contact<span class="punc">.send()</span></h2>
+    <div class="contact-box reveal">
+      <div>
+        <h2>Let's build something.</h2>
+        <p>Open to full-time roles, contract work, and interesting problems.</p>
+      </div>
+      <div class="social">
+        <a href="mailto:stanleytazanu262@gmail.com">email</a>
+        <a href="https://github.com/Tazanu">github</a>
+        <a href="https://www.linkedin.com/in/tazanu-stanley-7783542a3/">linkedin</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Tazanu Stanley · built with HTML, CSS, and a little help from an LLM.</footer>
+<!-- ============================================================
+     AI CHAT WIDGET
+     This calls a serverless proxy at /api/chat (see /api/chat.js)
+     so your NVIDIA API key stays on the server, never in the browser.
+     ============================================================ -->
+<button id="chat-toggle" aria-label="Open chat" aria-expanded="false">?</button>
+<div id="chat-panel" role="dialog" aria-label="Chat with an assistant about Tazanu">
+  <div class="chat-head">
+    <span><span class="title">ask-tazanu-ai</span> ~/chat</span>
+    <button id="chat-close" aria-label="Close chat">✕</button>
+  </div>
+  <div id="chat-log">
+    <div class="msg bot">Hi! I can answer questions about Tazanu's background, skills, and projects. Ask me anything.</div>
+  </div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="Ask about Tazanu's work..." autocomplete="off" />
+    <button type="submit">send</button>
+  </form>
+</div>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if(el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
+  }, {threshold: 0.12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  // Chat widget
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatLog = document.getElementById('chat-log');
+
+  // EDIT ME: a short profile the assistant uses to answer questions about you.
+  const PROFILE_CONTEXT = `
+You are a helpful assistant embedded on Tazanu Stanley's portfolio website.
+Answer visitor questions about Tazanu using ONLY the facts below. Be concise,
+friendly, and speak in third person about Tazanu. If asked something you
+don't have info on, say you're not sure and suggest they use the contact form.
+
+Facts about Tazanu:
+- Software & web developer, 4+ years experience, remote / open to relocate.
+- Stack: TypeScript, JavaScript, Python, React, Next.js, Node.js, PostgreSQL, Docker, AWS.
+- Projects: Commerce Engine (headless e-commerce backend), Flowboard (real-time
+  kanban task manager), Gateway CLI (API gateway scaffolding tool), and this portfolio site.
+- Interested in full-stack roles, contract work, and AI-integrated products.
+- Available for work now. Contact via email at stanleytazanu262@gmail.com.
+`.trim();
+
+  let history = [];
+
+  function openChat(){
+    chatPanel.classList.add('open');
+    chatToggle.setAttribute('aria-expanded', 'true');
+    chatInput.focus();
+  }
+  function closeChat(){
+    chatPanel.classList.remove('open');
+    chatToggle.setAttribute('aria-expanded', 'false');
+  }
+  chatToggle.addEventListener('click', () => {
+    chatPanel.classList.contains('open') ? closeChat() : openChat();
+  });
+  chatClose.addEventListener('click', closeChat);
+
+  function addMsg(text, cls){
+    const div = document.createElement('div');
+    div.className = 'msg ' + cls;
+    div.textContent = text;
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return div;
+  }
+
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const question = chatInput.value.trim();
+    if(!question) return;
+    addMsg(question, 'user');
+    chatInput.value = '';
+    history.push({role:'user', content: question});
+    const thinking = addMsg('...', 'bot');
+
+    try{
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          system: PROFILE_CONTEXT,
+          messages: history.slice(-8) // keep recent context small
+        })
+      });
+      if(!res.ok) throw new Error('Request failed (' + res.status + ')');
+      const data = await res.json();
+      thinking.textContent = data.reply || "Sorry, I didn't get a response.";
+      thinking.className = 'msg bot';
+      history.push({role:'assistant', content: data.reply || ''});
+    }catch(err){
+      thinking.textContent = 'Chat is not connected yet — this needs the /api/chat backend deployed (see api/chat.js).';
+      thinking.className = 'msg err';
+    }
+  });
+</script>
+
+</body>
+</html>
