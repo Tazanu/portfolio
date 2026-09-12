@@ -98,7 +98,9 @@ export default async function handler(req, res) {
 
       const detail = (await upstream.text()).slice(0, 300);
       console.error('NVIDIA error', model, upstream.status, detail);
-      attempts.push({ model, status: upstream.status });
+      // Include the provider's own message: a 404 here means "not available
+      // to this account", which is indistinguishable from a bad id otherwise.
+      attempts.push({ model, status: upstream.status, detail });
 
       // A bad key fails identically for every model — don't retry the chain.
       if (upstream.status === 401 || upstream.status === 403) {
