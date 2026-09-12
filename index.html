@@ -1329,20 +1329,42 @@ Facts about Tazanu Stanley:
     chatLog.scrollTop = chatLog.scrollHeight;
 
     try {
+      if (location.protocol === 'file:') throw new Error('local-file');
+
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ system: PROFILE_CONTEXT, messages: history.slice(-8) })
       });
-      if (!res.ok) throw new Error('Request failed (' + res.status + ')');
+      if (!res.ok) throw new Error('http-' + res.status);
       const data = await res.json();
       const reply = data.reply || "Sorry, I didn't get a response.";
       thinking.className = 'msg bot';
       thinking.textContent = reply;
       history.push({ role: 'assistant', content: reply });
-    } catch {
+    } catch (err) {
+      // Name the actual cause instead of a blanket "offline" — each of these
+      // needs a different fix, and they are indistinguishable otherwise.
+      const FALLBACK = ' In the meantime, email stanleytazanu262@gmail.com.';
+      const why = {
+        'local-file':
+          'This page is open from a local file, so there is no server to answer. Run "vercel dev" to test the assistant locally.',
+        'http-401':
+          'The API is behind Vercel Deployment Protection (401), so the request never reaches the server. Disable it in Project Settings to make the assistant public.',
+        'http-403':
+          'The API rejected the request (403).',
+        'http-404':
+          'The /api/chat function was not found (404) — check that it deployed.',
+        'http-500':
+          'The assistant is not configured on the server yet — its API key (NVIDIA_API_KEY) is missing.',
+        'http-502':
+          'The upstream model provider did not respond (502). This is usually temporary.',
+      }[err && err.message] ||
+          'The assistant could not be reached (' + ((err && err.message) || 'network error') + ').';
+
       thinking.className = 'msg err';
-      thinking.textContent = 'The assistant is offline right now — email stanleytazanu262@gmail.com and Tazanu will reply directly.';
+      thinking.textContent = why + FALLBACK;
+      console.warn('[chat]', err);
     } finally {
       pending = false;
       chatLog.scrollTop = chatLog.scrollHeight;
