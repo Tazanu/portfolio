@@ -18,27 +18,38 @@
 // GET /api/chat returns a health summary (no secrets) so the deployment can
 // be diagnosed without sending a message.
 
-const ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
+// Any OpenAI-compatible provider works — only the base URL, key and model
+// change. Set LLM_BASE_URL / LLM_API_KEY / LLM_MODEL to switch without
+// touching this file.
+//
+//   NVIDIA      https://integrate.api.nvidia.com/v1
+//   Groq        https://api.groq.com/openai/v1          (e.g. llama-3.3-70b-versatile)
+//   OpenRouter  https://openrouter.ai/api/v1            (has free-tier models)
+//   Together    https://api.together.xyz/v1
+//
+// NOTE: a NVIDIA key can authenticate yet still 404 with "Function not found
+// for account" — that account lacks the "Public API Endpoints" permission and
+// only NVIDIA support can grant it. Pointing at another provider is the
+// quicker route.
+const BASE_URL = (process.env.LLM_BASE_URL || 'https://integrate.api.nvidia.com/v1').replace(/\/$/, '');
+const ENDPOINT = `${BASE_URL}/chat/completions`;
 
-// NVIDIA retires model ids periodically — meta/llama-3.1-8b-instruct vanished
-// from the catalog and every request started failing with no clue why. Try a
-// short chain so one retirement degrades instead of breaking the assistant.
-// Current ids: https://integrate.api.nvidia.com/v1/models
 const MODELS = [
+  process.env.LLM_MODEL,
   process.env.NVIDIA_MODEL,
   'nvidia/nemotron-nano-3-30b-a3b',
   'mistralai/mistral-7b-instruct-v0.3',
-  'google/gemma-3-4b-it',
 ].filter(Boolean);
 
 export default async function handler(req, res) {
-  const apiKey = process.env.NVIDIA_API_KEY;
+  const apiKey = process.env.LLM_API_KEY || process.env.NVIDIA_API_KEY;
 
   if (req.method === 'GET') {
     return res.status(200).json({
       ok: Boolean(apiKey),
       keyConfigured: Boolean(apiKey),
       models: MODELS,
+      baseUrl: BASE_URL,
     });
   }
 
@@ -48,7 +59,7 @@ export default async function handler(req, res) {
   }
 
   if (!apiKey) {
-    return res.status(500).json({ error: 'Server is missing NVIDIA_API_KEY env var.' });
+    return res.status(500).json({ error: 'Server is missing LLM_API_KEY (or NVIDIA_API_KEY) env var.' });
   }
 
   const { system, messages } = req.body || {};
@@ -97,7 +108,7 @@ export default async function handler(req, res) {
       }
 
       const detail = (await upstream.text()).slice(0, 300);
-      console.error('NVIDIA error', model, upstream.status, detail);
+      console.error('[chat] provider error', model, upstream.status, detail);
       // Include the provider's own message: a 404 here means "not available
       // to this account", which is indistinguishable from a bad id otherwise.
       attempts.push({ model, status: upstream.status, detail });
@@ -110,7 +121,7 @@ export default async function handler(req, res) {
         });
       }
     } catch (err) {
-      console.error('NVIDIA request threw', model, err);
+      console.error('[chat] request threw', model, err);
       attempts.push({ model, status: 'network error' });
     }
   }

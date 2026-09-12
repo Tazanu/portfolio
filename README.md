@@ -61,7 +61,7 @@ URL, and JSON-LD `Person` structured data.
 
 - HTML5, modern CSS (custom properties, `clamp()`, `color-mix()`, fluid grids), vanilla JS
 - IBM Plex Sans & IBM Plex Mono
-- NVIDIA NIM API (chat backend)
+- Any OpenAI-compatible LLM API (chat backend)
 - Vercel — hosting + serverless functions
 
 ## Project structure
@@ -70,7 +70,7 @@ URL, and JSON-LD `Person` structured data.
 portfolio/
 ├── index.html                    # The entire site
 ├── api/
-│   └── chat.js                   # Serverless NVIDIA chat proxy
+│   └── chat.js                   # Serverless chat proxy (provider-agnostic)
 ├── assets/
 │   ├── portrait-400.{webp,jpg}   # Responsive portrait
 │   ├── portrait-800.{webp,jpg}
@@ -90,18 +90,43 @@ npm i -g vercel
 vercel
 ```
 
-Then in **Vercel → Settings → Environment Variables** add:
+Then in **Vercel → Settings → Environment Variables** add a key for any
+OpenAI-compatible provider:
 
-| Key | Value |
-|-----|-------|
-| `NVIDIA_API_KEY` | `nvapi-xxxxxxxxxxxxxxxx` |
+| Key | Example |
+|-----|---------|
+| `LLM_API_KEY` | your provider's key |
+| `LLM_BASE_URL` | `https://api.groq.com/openai/v1` |
+| `LLM_MODEL` | `llama-3.3-70b-versatile` |
 
 ```bash
 vercel --prod
 ```
 
-The chat widget goes live once the key is set. Without it the widget still renders and
-falls back to pointing visitors at the email address.
+### Choosing a provider
+
+`api/chat.js` speaks the OpenAI chat-completions format, so any of these work by
+changing only those three variables:
+
+| Provider | `LLM_BASE_URL` |
+|---|---|
+| Groq | `https://api.groq.com/openai/v1` |
+| OpenRouter | `https://openrouter.ai/api/v1` |
+| Together | `https://api.together.xyz/v1` |
+| NVIDIA NIM | `https://integrate.api.nvidia.com/v1` (the default) |
+
+`GET /api/chat` returns a health summary — whether a key is configured, the base
+URL, and the models it will try — so you can check a deployment without sending
+a message.
+
+> **A note on NVIDIA NIM.** A valid NVIDIA key can still return
+> `404 Function '<uuid>': Not found for account '<id>'`. That means the account
+> lacks the *Public API Endpoints* permission, which only NVIDIA support can
+> grant — the key itself is fine. Point `LLM_BASE_URL` at another provider to
+> get moving.
+
+If every model fails, the response lists each attempt with the provider's own
+status and message, so the cause is visible without opening the server logs.
 
 ## Local development
 
@@ -112,7 +137,9 @@ vercel dev
 Create `.env.local` in the project root (never commit it):
 
 ```
-NVIDIA_API_KEY=nvapi-xxxxxxxxxxxxxxxx
+LLM_API_KEY=your-key-here
+LLM_BASE_URL=https://api.groq.com/openai/v1
+LLM_MODEL=llama-3.3-70b-versatile
 ```
 
 ## Editing the content
