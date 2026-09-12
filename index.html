@@ -64,7 +64,6 @@
   --step-5:  clamp(2.80rem, 1.40rem + 6.09vw, 6.90rem);
 
   /* --- Matching fluid space scale --------------------------------------- */
-  --space-2xs: clamp(0.35rem, 0.33rem + 0.09vw, 0.40rem);
   --space-xs:  clamp(0.60rem, 0.55rem + 0.22vw, 0.75rem);
   --space-s:   clamp(0.90rem, 0.82rem + 0.35vw, 1.15rem);
   --space-m:   clamp(1.40rem, 1.22rem + 0.78vw, 1.95rem);
@@ -202,6 +201,7 @@ p{ text-wrap:pretty; }
   font-family:var(--mono); font-size:var(--step--1); font-weight:600;
   color:var(--accent); display:inline-flex; align-items:center; gap:.35em;
   letter-spacing:-0.02em;
+  min-height:44px; /* target size on every pointer type */
 }
 .logo .caret{
   width:.5em; height:1.05em; background:var(--accent); border-radius:1px;
@@ -243,6 +243,13 @@ p{ text-wrap:pretty; }
 :root[data-theme="light"] .icon-moon{ display:block; }
 
 .nav-toggle{ display:none; }
+
+@media (pointer: coarse){
+  .nav a{ min-height:44px; display:inline-flex; align-items:center; }
+  .logo{ min-height:44px; }
+  .socials a{ min-height:44px; }
+  .chat-suggest button{ min-height:36px; }
+}
 
 @media (max-width: 760px){
   .nav-toggle{ display:grid; }
@@ -507,14 +514,17 @@ p{ text-wrap:pretty; }
 }
 .project:hover .stack li{ border-color:color-mix(in srgb, var(--accent) 28%, var(--border)); }
 
-.project-links{ display:flex; flex-wrap:wrap; gap:var(--space-s); margin-top:var(--space-m); }
+.project-links{ display:flex; flex-wrap:wrap; gap:var(--space-m); margin-top:var(--space-xs); }
 .project-links a{
   font-family:var(--mono); font-size:var(--step--1); color:var(--accent);
   display:inline-flex; align-items:center; gap:.4em;
-  border-bottom:1px solid color-mix(in srgb, var(--accent) 32%, transparent);
-  padding-bottom:1px; transition:border-color .2s var(--ease);
+  min-height:44px; /* WCAG 2.5.8 target size */
+  text-decoration:underline;
+  text-decoration-color:color-mix(in srgb, var(--accent) 34%, transparent);
+  text-underline-offset:4px;
+  transition:text-decoration-color .2s var(--ease);
 }
-.project-links a:hover{ border-bottom-color:var(--accent); }
+.project-links a:hover{ text-decoration-color:var(--accent); }
 .project-links a .arrow{ transition:transform .18s var(--ease); }
 .project-links a:hover .arrow{ transform:translate(2px, -2px); }
 
@@ -527,7 +537,7 @@ p{ text-wrap:pretty; }
    the summary take up the slack. */
 .work-grid .project{ display:flex; flex-direction:column; }
 .work-grid .project .stack{ margin-top:auto; padding-top:var(--space-m); }
-.work-grid .project .project-links{ margin-top:var(--space-s); }
+.work-grid .project .project-links{ margin-top:0; }
 
 /* ============================================================================
    7. ABOUT
@@ -677,7 +687,13 @@ p{ text-wrap:pretty; }
   transition:transform .18s var(--ease), box-shadow .18s var(--ease);
 }
 #chat-toggle:hover{ transform:translateY(-2px) scale(1.02); }
-#chat-toggle svg{ width:1.05em; height:1.05em; }
+#chat-toggle svg{ width:1.05em; height:1.05em; flex:none; }
+
+@media (max-width: 560px){
+  #chat-toggle{ width:52px; height:52px; padding:0; justify-content:center; border-radius:50%; }
+  #chat-toggle .label{ display:none; }
+  #chat-panel{ bottom:calc(var(--space-m) + 3.9rem); }
+}
 
 #chat-panel{
   position:fixed; right:var(--space-m); bottom:calc(var(--space-m) + 3.6rem); z-index:96;
@@ -912,7 +928,7 @@ p{ text-wrap:pretty; }
           </p>
           <ul class="stack"><li>Dart</li><li>Flutter</li><li>REST</li></ul>
           <div class="project-links">
-            <a href="https://studyhub-elearning.vercel.app" target="_blank" rel="noopener noreferrer">Live <span class="arrow" aria-hidden="true">↗</span></a>
+            <a href="https://studyhub-elearning.vercel.app" target="_blank" rel="noopener noreferrer">Live site <span class="arrow" aria-hidden="true">↗</span></a>
             <a href="https://github.com/Tazanu/studyhub-elearning" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -925,20 +941,21 @@ p{ text-wrap:pretty; }
             so an application can score a student's risk and flag them for support early
             instead of after they've already gone quiet.
           </p>
-          <ul class="stack"><li>Python</li><li>scikit-learn</li><li>REST</li></ul>
+          <ul class="stack"><li>Python</li><li>Flask</li><li>scikit-learn</li><li>pandas</li></ul>
           <div class="project-links">
             <a href="https://github.com/Tazanu/student-dropout-api" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
 
         <article class="project reveal">
-          <p class="project-eyebrow"><span class="chip warm">AI</span></p>
+          <p class="project-eyebrow"><span class="chip warm">Recommender system</span></p>
           <h3>StudyHub AI</h3>
           <p class="summary">
-            The AI service behind StudyHub — the piece that turns course material and student
-            activity into something useful in the product rather than a chatbot bolted onto the side.
+            The recommendation engine behind StudyHub. Collaborative-filtering, content-based
+            and hybrid recommenders plus question-similarity matching, served from a Flask API —
+            so the platform suggests the right group, tutor or answer instead of a static list.
           </p>
-          <ul class="stack"><li>Python</li><li>LLM APIs</li></ul>
+          <ul class="stack"><li>Python</li><li>Flask</li><li>scikit-learn</li><li>pandas</li><li>MySQL</li></ul>
           <div class="project-links">
             <a href="https://github.com/Tazanu/studyhubAI" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
           </div>
@@ -950,7 +967,7 @@ p{ text-wrap:pretty; }
           <p class="summary">
             One hand-written HTML file, no framework and no build step, with a small AI assistant
             wired through a serverless proxy so the API key never reaches the browser.
-            Fluid type scale, light and dark themes, and a ~40&nbsp;KB hero image.
+            Fluid type scale, light and dark themes, and a 99&nbsp;KB first load.
           </p>
           <ul class="stack"><li>HTML</li><li>Modern CSS</li><li>Vanilla JS</li><li>Vercel Functions</li></ul>
           <div class="project-links">
@@ -1094,11 +1111,11 @@ p{ text-wrap:pretty; }
      Calls the serverless proxy at /api/chat so the API key stays
      on the server and never reaches the browser.
      ============================================================ -->
-<button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel">
+<button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel" aria-label="Ask a question about Tazanu">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.8L3 20.5l1.4-4.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/>
   </svg>
-  Ask about me
+  <span class="label">Ask about me</span>
 </button>
 
 <div id="chat-panel" role="dialog" aria-label="Ask a question about Tazanu" hidden>
@@ -1257,9 +1274,11 @@ Facts about Tazanu Stanley:
   checks; there is also content-quality and uploader-trust scoring.
   Live at studyhubwebapp.vercel.app.
 - StudyHub Mobile: the Flutter/Dart build of StudyHub.
-- Student Dropout API: a Python service exposing a trained dropout-risk model
-  over REST so students at risk can be supported early.
-- StudyHub AI: the Python AI service behind StudyHub.
+- Student Dropout API: a Flask service exposing a trained scikit-learn
+  dropout-risk model over REST so students at risk can be supported early.
+- StudyHub AI: the recommendation engine behind StudyHub — collaborative,
+  content-based and hybrid recommenders plus question-similarity matching,
+  built with Flask, scikit-learn, pandas and MySQL.
 - This portfolio: a single hand-written HTML file, no framework or build step,
   with this assistant running through a serverless proxy.
 - Contact: stanleytazanu262@gmail.com, github.com/Tazanu, and LinkedIn.
