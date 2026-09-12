@@ -1,600 +1,1346 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tazanu Stanley — Software Engineer</title>
-<meta name="description" content="Portfolio of Tazanu Stanley, software & web developer.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tazanu Stanley — Software &amp; Web Developer</title>
+<meta name="description" content="Tazanu Stanley builds full-stack web applications, ML-backed APIs, and AI-integrated products. Creator of StudyHub, a peer-to-peer e-learning platform for university students.">
+<meta name="author" content="Tazanu Stanley">
+<meta name="theme-color" content="#0A0E13" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
+
+<!-- EDIT ME: replace with your custom domain once you own one (a custom
+     domain is one of the strongest professionalism signals for recruiters). -->
+<link rel="canonical" href="https://portfolio-tazan-s-projects.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tazanu Stanley — Software &amp; Web Developer">
+<meta property="og:description" content="Full-stack web apps, ML-backed APIs, and AI-integrated products.">
+<meta property="og:url" content="https://portfolio-tazan-s-projects.vercel.app/">
+<meta property="og:image" content="https://portfolio-tazan-s-projects.vercel.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tazanu Stanley — Software &amp; Web Developer">
+<meta name="twitter:description" content="Full-stack web apps, ML-backed APIs, and AI-integrated products.">
+<meta name="twitter:image" content="https://portfolio-tazan-s-projects.vercel.app/assets/og.jpg">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230A0E13'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='monospace' font-weight='700' fill='%235EEAD4'>T</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Tazanu Stanley",
+  "jobTitle": "Software & Web Developer",
+  "email": "mailto:stanleytazanu262@gmail.com",
+  "url": "https://portfolio-tazan-s-projects.vercel.app/",
+  "sameAs": [
+    "https://github.com/Tazanu",
+    "https://www.linkedin.com/in/tazanu-stanley-7783542a3/"
+  ],
+  "knowsAbout": ["JavaScript", "TypeScript", "React", "Node.js", "Express",
+                 "PostgreSQL", "Prisma", "Python", "Flutter", "Socket.IO", "Machine Learning"]
+}
+</script>
+
 <style>
-  /* ============================================================
-     EDIT ME: change --accent colors here if you want a different
-     palette. Everything derives from these tokens.
-     ============================================================ */
-  :root{
-    --bg: #080C10;
-    --bg-alt: #0B1018;
-    --surface: #0F1720;
-    --surface-2: #131E28;
-    --grid-line: rgba(94, 234, 212, 0.06);
-    --border: #1E2D3D;
-    --text: #E6EDF3;
-    --text-muted: #8B98A5;
-    --text-dim: #5C6773;
-    --teal: #5EEAD4;
-    --teal-dim: rgba(94, 234, 212, 0.14);
-    --teal-glow: rgba(94, 234, 212, 0.25);
-    --amber: #F0A868;
-    --amber-dim: rgba(240, 168, 104, 0.14);
-    --amber-glow: rgba(240, 168, 104, 0.22);
-    --purple: #A78BFA;
-    --purple-dim: rgba(167, 139, 250, 0.12);
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    --sans: 'IBM Plex Sans', system-ui, sans-serif;
-    --radius: 6px;
-  }
+/* ============================================================================
+   1. DESIGN TOKENS
+   Every color, size and rhythm value in the page derives from this block.
+   Change a token here and the whole site follows.
+   ========================================================================= */
+:root{
+  /* --- Fluid type scale: min size at 360px -> max size at 1280px --------- */
+  --step--1: clamp(0.80rem, 0.77rem + 0.13vw, 0.875rem);
+  --step-0:  clamp(0.95rem, 0.91rem + 0.17vw, 1.05rem);
+  --step-1:  clamp(1.10rem, 1.02rem + 0.35vw, 1.35rem);
+  --step-2:  clamp(1.35rem, 1.18rem + 0.74vw, 1.85rem);
+  --step-3:  clamp(1.70rem, 1.36rem + 1.48vw, 2.70rem);
+  --step-4:  clamp(2.20rem, 1.48rem + 3.13vw, 4.30rem);
+  --step-5:  clamp(2.80rem, 1.40rem + 6.09vw, 6.90rem);
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
-  }
+  /* --- Matching fluid space scale --------------------------------------- */
+  --space-2xs: clamp(0.35rem, 0.33rem + 0.09vw, 0.40rem);
+  --space-xs:  clamp(0.60rem, 0.55rem + 0.22vw, 0.75rem);
+  --space-s:   clamp(0.90rem, 0.82rem + 0.35vw, 1.15rem);
+  --space-m:   clamp(1.40rem, 1.22rem + 0.78vw, 1.95rem);
+  --space-l:   clamp(2.10rem, 1.75rem + 1.52vw, 3.20rem);
+  --space-xl:  clamp(3.20rem, 2.44rem + 3.30vw, 5.50rem);
+  --space-2xl: clamp(4.50rem, 3.13rem + 5.96vw, 8.50rem);
 
-  body{
-    background:
-      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/44px 44px,
-      var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, sans-serif;
 
-  /* glowing orbs */
-  body::before, body::after{
-    content:''; position:fixed; border-radius:50%; pointer-events:none; z-index:0;
-    filter:blur(80px); opacity:0.18;
-  }
-  body::before{
-    width:600px; height:600px; top:-100px; left:-150px;
-    background:radial-gradient(circle, var(--teal), transparent 70%);
-    animation:orbDrift1 12s ease-in-out infinite;
-  }
-  body::after{
-    width:500px; height:500px; bottom:-80px; right:-100px;
-    background:radial-gradient(circle, var(--amber), transparent 70%);
-    animation:orbDrift2 14s ease-in-out infinite;
-  }
-  @keyframes orbDrift1{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,40px);}}
-  @keyframes orbDrift2{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,-30px);}}
+  --measure: 62ch;
+  --radius: 10px;
+  --radius-s: 6px;
+  --shell: 1140px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  a{color:inherit; text-decoration:none;}
-  ::selection{background:var(--teal); color:#04140F;}
+  /* --- Dark palette (default) ------------------------------------------- */
+  --bg:        #0A0E13;
+  --bg-sunk:   #070A0E;
+  --surface:   #111820;
+  --surface-2: #17212C;
+  --border:    #1F2C39;
+  --border-soft: #16202A;
+  --text:      #E9F0F6;
+  --text-muted:#A3B0BC;
+  --text-dim:  #8795A3;
+  --accent:    #5EEAD4;
+  --accent-ink:#04140F;
+  --accent-2:  #F0A868;
+  --grid-line: rgba(94, 234, 212, 0.055);
+  --shadow:    0 1px 2px rgba(0,0,0,.35), 0 12px 34px -12px rgba(0,0,0,.6);
+  --shadow-lift: 0 2px 4px rgba(0,0,0,.3), 0 22px 50px -16px rgba(0,0,0,.7);
+}
 
-  :focus-visible{
-    outline:2px solid var(--teal);
-    outline-offset:3px;
-  }
+/* Light palette. Accents are darkened so text on the page ground clears
+   WCAG AA (4.5:1) — the bright teal is decoration-only in this theme. */
+:root[data-theme="light"]{
+  --bg:        #FBFAF7;
+  --bg-sunk:   #F2F1EC;
+  --surface:   #FFFFFF;
+  --surface-2: #F6F5F1;
+  --border:    #E2E1DA;
+  --border-soft: #EBEAE4;
+  --text:      #10181F;
+  --text-muted:#5A6672;
+  --text-dim:  #606B76;
+  --accent:    #0C7D6D;
+  --accent-ink:#FFFFFF;
+  --accent-2:  #8A4E0E;
+  --grid-line: rgba(16, 24, 31, 0.035);
+  --shadow:    0 1px 2px rgba(16,24,31,.05), 0 10px 28px -14px rgba(16,24,31,.18);
+  --shadow-lift: 0 2px 6px rgba(16,24,31,.07), 0 22px 46px -18px rgba(16,24,31,.26);
+}
 
-  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+/* ============================================================================
+   2. BASE
+   ========================================================================= */
+*, *::before, *::after{ box-sizing:border-box; }
+*{ margin:0; padding:0; }
 
-  /* ---------- NAV ---------- */
-  header.site-nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(8,12,16,0.88);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border);
-    box-shadow:0 1px 30px rgba(94,234,212,0.06);
-  }
-  .nav-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:16px 28px; max-width:1080px; margin:0 auto;
-  }
-  .logo{
-    font-family:var(--mono); font-size:14px; color:var(--teal); font-weight:600;
-    display:flex; align-items:center; gap:6px;
-  }
-  .logo .cursor{
-    display:inline-block; width:7px; height:14px; background:var(--teal);
-    animation:blink 1.1s steps(1) infinite;
-  }
-  @keyframes blink{50%{opacity:0;}}
-  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:13px;}
-  nav.links a{color:var(--text-muted); transition:color .2s; position:relative;}
-  nav.links a::after{content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--teal); transition:width .2s;}
-  nav.links a:hover{color:var(--teal);}
-  nav.links a:hover::after{width:100%;}
-  .nav-toggle{display:none; background:none; border:1px solid var(--border); color:var(--text); font-family:var(--mono); padding:6px 10px; border-radius:var(--radius);}
+html{ scroll-behavior:smooth; scroll-padding-top:5rem; -webkit-text-size-adjust:100%; }
 
-  @media (max-width:720px){
-    nav.links{display:none;}
-    .nav-toggle{display:block;}
-    nav.links.open{
-      display:flex; flex-direction:column; position:absolute; top:60px; left:0; right:0;
-      background:var(--bg-alt); padding:20px 28px; border-bottom:1px solid var(--border); gap:16px;
-    }
-  }
+body{
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 52px 52px,
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 52px 52px,
+    var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:var(--step-0);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  transition:background-color .35s var(--ease), color .35s var(--ease);
+}
 
-  /* ---------- HERO JUMBOTRON ---------- */
-  .hero{
-    position:relative; width:100vw; left:50%; right:50%;
-    margin-left:-50vw; margin-right:-50vw;
-    height:92vh; min-height:560px; overflow:hidden;
-    display:flex; align-items:flex-end; border-top:none;
-    padding:0; margin-top:0;
-  }
-  .hero-bg{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:contain; object-position:right center;
-    background:#0B0F14;
-    animation:imgFloat 6s ease-in-out infinite;
-  }
-  @keyframes imgFloat{
-    0%,100%{transform:translateY(0px) scale(1);}
-    50%{transform:translateY(-12px) scale(1.02);}
-  }
-  .hero-overlay{
-    position:absolute; inset:0;
-    background:linear-gradient(
-      120deg,
-      rgba(8,12,16,0.92) 0%,
-      rgba(8,12,16,0.75) 45%,
-      rgba(94,234,212,0.04) 70%,
-      rgba(8,12,16,0.55) 100%
-    ),
-    linear-gradient(to bottom, rgba(8,12,16,0.3) 0%, rgba(8,12,16,0.95) 100%);
-  }
-  .hero-inner{
-    position:relative; z-index:2;
-    width:100%; max-width:1080px; margin:0 auto;
-    padding:0 28px 64px;
-    display:flex; flex-direction:column; align-items:flex-start;
-    justify-content:flex-end;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:13px; color:var(--amber);
-    display:flex; align-items:center; gap:10px; margin-bottom:16px;
-  }
-  .eyebrow::before{content:"●"; font-size:8px; color:var(--amber); animation:pulse 2s ease-in-out infinite;}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .hero h1{
-    font-family:var(--mono); font-weight:700; font-size:clamp(18px, 2.8vw, 34px);
-    line-height:1.3; letter-spacing:-0.01em; max-width:820px;
-    text-shadow:0 2px 24px rgba(0,0,0,0.6);
-  }
-  .hero h1 .kw{color:var(--teal);}
-  .hero h1 .str{color:var(--amber);}
-  .hero h1 .punc{color:rgba(255,255,255,0.4);}
-  .hero-sub{
-    margin-top:16px; max-width:560px; color:rgba(230,237,243,0.85); font-size:15px; line-height:1.75;
-    text-shadow:0 1px 8px rgba(0,0,0,0.5);
-  }
-  .hero-cta{margin-top:24px; display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    font-family:var(--mono); font-size:13px; padding:12px 20px; border-radius:var(--radius);
-    border:1px solid var(--border); transition:all .15s; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary{background:var(--teal); color:#04140F; border-color:var(--teal); font-weight:600;}
-  .btn-primary:hover{background:#7FF0DE;}
-  .btn-ghost{color:#fff; background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.3); backdrop-filter:blur(4px);}
-  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+img, svg{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3{ line-height:1.15; letter-spacing:-0.02em; font-weight:600; text-wrap:balance; }
+p{ text-wrap:pretty; }
+::selection{ background:var(--accent); color:var(--accent-ink); }
 
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:70px 0; border-top:1px solid var(--border);}
-  .section-tag{
-    font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:.08em;
-    text-transform:uppercase; margin-bottom:10px;
-  }
-  .section-title{
-    font-family:var(--mono); font-size:24px; font-weight:600; margin-bottom:36px; text-align:left;
-    background:linear-gradient(90deg, var(--text) 60%, var(--teal));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  }
-  .section-title .punc{color:var(--teal); -webkit-text-fill-color:var(--teal);}
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:2px;
+}
 
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid; grid-template-columns:180px 1.3fr 1fr; gap:40px; align-items:start;}
-  @media (max-width:900px){.about-grid{grid-template-columns:140px 1fr;}}
-  @media (max-width:600px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid p{color:var(--text-muted); margin-bottom:16px; max-width:52ch; line-height:1.8; text-align:left;}
-  .about-photo-wrap{position:relative; width:100%; aspect-ratio:3/4; overflow:hidden; border-radius:6px; border:1px solid var(--border); box-shadow:0 0 30px var(--teal-glow), 4px 4px 0 var(--teal-dim);}
-  .about-photo{width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform .4s;}
-  .about-photo-wrap:hover .about-photo{transform:scale(1.04);}
-  .facts{
-    font-family:var(--mono); font-size:13px; background:var(--surface);
-    border:1px solid var(--border); border-radius:var(--radius); padding:20px;
-    align-self:start;
-    box-shadow:0 0 24px rgba(94,234,212,0.08);
-    transition:box-shadow .3s;
-  }
-  .facts:hover{box-shadow:0 0 36px var(--teal-glow);}
-  .facts .row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--border);}
-  .facts .row:last-child{border-bottom:none;}
-  .facts .k{color:var(--text-dim);}
-  .facts .v{color:var(--teal);}
+.skip-link{
+  position:absolute; left:var(--space-s); top:-100px; z-index:200;
+  background:var(--accent); color:var(--accent-ink);
+  padding:.7rem 1.1rem; border-radius:var(--radius-s);
+  font-family:var(--mono); font-size:var(--step--1); font-weight:600;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{ top:var(--space-s); }
 
-  /* ---------- SKILLS ---------- */
-  .skills{font-family:var(--mono); font-size:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px 28px; overflow-x:auto;}
-  .skills .line{white-space:pre; line-height:1.9;}
-  .skills .kw{color:var(--teal);}
-  .skills .punc{color:var(--text-dim);}
-  .skills .mod{color:var(--amber);}
-  .skills .comment{color:var(--text-dim); font-style:italic;}
+.shell{ width:min(100% - 2 * var(--space-m), var(--shell)); margin-inline:auto; }
 
-  /* ---------- PROJECTS ---------- */
-  .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
-  @media (max-width:800px){.projects{grid-template-columns:1fr;}}
-  .card{
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-    overflow:hidden; transition:border-color .2s, transform .2s, box-shadow .2s;
-    position:relative;
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *, *::before, *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
   }
-  .card::before{
-    content:''; position:absolute; inset:0; opacity:0;
-    background:linear-gradient(135deg, var(--teal-dim), var(--purple-dim));
-    transition:opacity .3s; pointer-events:none;
-  }
-  .card:hover{border-color:var(--teal); transform:translateY(-4px); box-shadow:0 8px 32px var(--teal-glow);}
-  .card:hover::before{opacity:1;}
-  .card-tab{
-    display:flex; align-items:center; gap:8px; padding:10px 14px;
-    background:var(--surface-2); border-bottom:1px solid var(--border);
-    font-family:var(--mono); font-size:12px; color:var(--text-dim);
-  }
-  .card-tab .dot{width:8px; height:8px; border-radius:50%; background:var(--text-dim);}
-  .card-body{padding:22px;}
-  .card-body h3{font-size:17px; margin-bottom:10px; font-weight:600;}
-  .card-body p{color:var(--text-muted); font-size:14px; margin-bottom:18px; line-height:1.7; text-align:left;}
-  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
-  .tag{font-family:var(--mono); font-size:11px; color:var(--amber); background:var(--amber-dim); padding:3px 9px; border-radius:20px; border:1px solid rgba(240,168,104,0.2); transition:background .2s;}
-  .tag:hover{background:rgba(240,168,104,0.28);}
-  .card-links{display:flex; gap:16px; font-family:var(--mono); font-size:12px;}
-  .card-links a{color:var(--teal); border-bottom:1px solid transparent;}
-  .card-links a:hover{border-color:var(--teal);}
+}
 
-  /* ---------- CONTACT ---------- */
-  .contact-box{
-    background:linear-gradient(135deg, var(--surface) 60%, rgba(94,234,212,0.05));
-    border:1px solid var(--border); border-radius:var(--radius);
-    padding:36px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
-    box-shadow:0 0 40px rgba(94,234,212,0.07);
-  }
-  .contact-box h2{font-family:var(--mono); font-size:20px; margin-bottom:8px;}
-  .contact-box p{color:var(--text-muted); font-size:14px;}
-  .social{display:flex; gap:14px; font-family:var(--mono); font-size:13px;}
-  .social a{border:1px solid var(--border); padding:9px 16px; border-radius:var(--radius); transition:.2s;}
-  .social a:hover{border-color:var(--teal); color:var(--teal); box-shadow:0 0 14px var(--teal-glow); background:var(--teal-dim);}
+/* ============================================================================
+   3. HEADER + NAV
+   ========================================================================= */
+.progress{
+  position:fixed; inset:0 auto auto 0; z-index:90;
+  height:2px; width:100%; transform-origin:0 50%; transform:scaleX(0);
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+}
 
-  footer{
-    padding:30px 0; font-family:var(--mono); font-size:12px; color:var(--text-dim); text-align:center;
-    border-top:1px solid var(--border);
-    background:linear-gradient(to right, transparent, rgba(94,234,212,0.04), transparent);
-  }
+.site-header{
+  position:sticky; top:0; z-index:80;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.site-header[data-stuck="true"]{ border-bottom-color:var(--border); }
 
-  /* ---------- ANIMATIONS ---------- */
-  @keyframes fadeUp{
-    from{opacity:0; transform:translateY(28px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-  @keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-  }
-  .reveal{opacity:0;}
-  .reveal.visible{animation:fadeUp .6s cubic-bezier(.22,.61,.36,1) forwards;}
-  .reveal-fade.visible{animation:fadeIn .7s ease forwards;}
-  .delay-1{animation-delay:.1s;}
-  .delay-2{animation-delay:.2s;}
-  .delay-3{animation-delay:.3s;}
-  .delay-4{animation-delay:.4s;}
+.header-inner{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-s);
+  padding-block:var(--space-s);
+}
 
-  /* ---------- CHAT WIDGET ---------- */
-  #chat-toggle{
-    position:fixed; bottom:24px; right:24px; z-index:60;
-    width:54px; height:54px; border-radius:50%;
-    background:linear-gradient(135deg, var(--teal), #38bfa8); color:#04140F; border:none; cursor:pointer;
-    font-family:var(--mono); font-size:20px; font-weight:700;
-    box-shadow:0 6px 28px rgba(94,234,212,0.4);
-    display:flex; align-items:center; justify-content:center;
-    transition:transform .15s, box-shadow .15s;
-  }
-  #chat-toggle:hover{transform:scale(1.08); box-shadow:0 8px 36px rgba(94,234,212,0.6);}
+.logo{
+  font-family:var(--mono); font-size:var(--step--1); font-weight:600;
+  color:var(--accent); display:inline-flex; align-items:center; gap:.35em;
+  letter-spacing:-0.02em;
+}
+.logo .caret{
+  width:.5em; height:1.05em; background:var(--accent); border-radius:1px;
+  animation:blink 1.15s steps(1) infinite;
+}
+@keyframes blink{ 50%{ opacity:0; } }
 
-  #chat-panel{
-    position:fixed; bottom:90px; right:24px; z-index:60;
-    width:340px; max-width:calc(100vw - 32px); height:440px; max-height:calc(100vh - 130px);
-    background:var(--bg-alt); border:1px solid var(--border); border-radius:6px;
-    display:none; flex-direction:column; overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+.nav{ display:flex; align-items:center; gap:clamp(1rem, 2.4vw, 2rem); }
+.nav[hidden]{ display:none; }
+.nav a{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-muted);
+  position:relative; padding-block:.25rem; transition:color .2s var(--ease);
+}
+.nav a::after{
+  content:''; position:absolute; left:0; bottom:0; height:1px; width:0;
+  background:var(--accent); transition:width .25s var(--ease);
+}
+.nav a:hover{ color:var(--text); }
+.nav a:hover::after,
+.nav a[aria-current="true"]::after{ width:100%; }
+.nav a[aria-current="true"]{ color:var(--accent); }
+
+.header-tools{ display:flex; align-items:center; gap:var(--space-xs); }
+
+.icon-btn{
+  display:grid; place-items:center;
+  width:2.3rem; height:2.3rem; border-radius:var(--radius-s);
+  background:transparent; border:1px solid var(--border);
+  color:var(--text-muted); cursor:pointer;
+  transition:color .2s var(--ease), border-color .2s var(--ease), background-color .2s var(--ease);
+}
+.icon-btn:hover{ color:var(--accent); border-color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent); }
+.icon-btn svg{ width:1.05rem; height:1.05rem; }
+
+/* Show sun in dark theme (click => go light), moon in light theme. */
+.icon-sun{ display:block; }
+.icon-moon{ display:none; }
+:root[data-theme="light"] .icon-sun{ display:none; }
+:root[data-theme="light"] .icon-moon{ display:block; }
+
+.nav-toggle{ display:none; }
+
+@media (max-width: 760px){
+  .nav-toggle{ display:grid; }
+  .nav{
+    position:absolute; inset:100% 0 auto 0;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--bg); border-block:1px solid var(--border);
+    padding:var(--space-xs) var(--space-m) var(--space-s);
+    box-shadow:var(--shadow);
   }
-  #chat-panel.open{display:flex;}
-  .chat-head{
-    background:var(--surface-2); padding:10px 14px; border-bottom:1px solid var(--border);
-    font-family:var(--mono); font-size:12px; color:var(--text-muted);
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .chat-head span.title{color:var(--teal);}
-  .chat-head button{background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:14px;}
-  #chat-log{flex:1; overflow-y:auto; padding:14px; font-family:var(--mono); font-size:13px; display:flex; flex-direction:column; gap:12px;}
-  .msg{max-width:88%; padding:9px 12px; border-radius:6px; line-height:1.5;}
-  .msg.bot{background:var(--surface); align-self:flex-start; border:1px solid var(--border);}
-  .msg.user{background:var(--teal-dim); color:var(--teal); align-self:flex-end;}
-  .msg.err{background:rgba(240,100,100,.1); color:#F08080; align-self:flex-start; border:1px solid rgba(240,100,100,.25);}
-  #chat-form{display:flex; border-top:1px solid var(--border);}
-  #chat-input{
-    flex:1; background:transparent; border:none; color:var(--text); padding:12px 14px;
-    font-family:var(--mono); font-size:13px;
-  }
-  #chat-input:focus{outline:none;}
-  #chat-form button{
-    background:var(--teal); color:#04140F; border:none; padding:0 16px; font-family:var(--mono); font-weight:600; cursor:pointer;
-  }
+  .nav[hidden]{ display:none; }
+  .nav a{ padding-block:var(--space-xs); font-size:var(--step-0); border-bottom:1px solid var(--border-soft); }
+  .nav a:last-child{ border-bottom:none; }
+  .nav a::after{ display:none; }
+}
+
+/* ============================================================================
+   4. HERO — typographic, name-first.
+   Recruiters scan for Name -> Title -> Work in the first few seconds, so the
+   name is the largest thing on the page and nothing competes with it.
+   ========================================================================= */
+.hero{
+  position:relative;
+  padding-block:clamp(3.5rem, 9vh, 7rem) var(--space-l);
+  overflow:hidden;
+}
+.hero::before{
+  content:''; position:absolute; z-index:-1;
+  width:min(70vw, 780px); aspect-ratio:1; border-radius:50%;
+  top:-38%; right:-14%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--accent) 26%, transparent), transparent 68%);
+  filter:blur(90px); opacity:.55;
+  animation:drift 18s ease-in-out infinite;
+}
+.hero::after{
+  content:''; position:absolute; z-index:-1;
+  width:min(52vw, 560px); aspect-ratio:1; border-radius:50%;
+  bottom:-30%; left:-16%;
+  background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 22%, transparent), transparent 68%);
+  filter:blur(90px); opacity:.4;
+  animation:drift 22s ease-in-out infinite reverse;
+}
+@keyframes drift{
+  0%,100%{ transform:translate3d(0,0,0) scale(1); }
+  50%{ transform:translate3d(-4%, 5%, 0) scale(1.08); }
+}
+
+.status{
+  display:inline-flex; align-items:center; gap:.6em;
+  font-family:var(--mono); font-size:var(--step--1); color:var(--accent-2);
+  border:1px solid color-mix(in srgb, var(--accent-2) 32%, transparent);
+  background:color-mix(in srgb, var(--accent-2) 10%, transparent);
+  padding:.42em .95em; border-radius:100px;
+}
+.status .dot{
+  width:.5em; height:.5em; border-radius:50%; background:var(--accent-2);
+  box-shadow:0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent);
+  animation:ping 2.4s var(--ease) infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--accent-2) 55%, transparent); }
+  70%{ box-shadow:0 0 0 .55em transparent; }
+  100%{ box-shadow:0 0 0 0 transparent; }
+}
+
+.hero h1{
+  margin-top:var(--space-m);
+  font-size:var(--step-5);
+  font-weight:700;
+  letter-spacing:-0.045em;
+  line-height:0.98;
+}
+.hero .role{
+  margin-top:var(--space-s);
+  font-size:var(--step-3);
+  font-weight:600;
+  letter-spacing:-0.03em;
+  color:var(--accent);
+}
+.hero .pitch{
+  margin-top:var(--space-m);
+  max-width:var(--measure);
+  font-size:var(--step-1);
+  color:var(--text-muted);
+  line-height:1.6;
+}
+.hero .pitch strong{ color:var(--text); font-weight:600; }
+
+.hero-actions{
+  margin-top:var(--space-l);
+  display:flex; flex-wrap:wrap; gap:var(--space-xs);
+}
+
+.btn{
+  display:inline-flex; align-items:center; gap:.55em;
+  font-family:var(--mono); font-size:var(--step--1); font-weight:500;
+  padding:.8em 1.35em; border-radius:var(--radius-s);
+  border:1px solid var(--border); cursor:pointer; background:transparent; color:var(--text);
+  transition:transform .18s var(--ease), background-color .18s var(--ease),
+             border-color .18s var(--ease), color .18s var(--ease), box-shadow .18s var(--ease);
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn:active{ transform:translateY(0); }
+.btn-primary{
+  background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600;
+  box-shadow:0 10px 26px -12px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+.btn-primary:hover{ box-shadow:0 16px 34px -12px color-mix(in srgb, var(--accent) 85%, transparent); }
+.btn-ghost:hover{ border-color:var(--accent); color:var(--accent); }
+.btn .arrow{ transition:transform .18s var(--ease); }
+.btn:hover .arrow{ transform:translateX(3px); }
+
+/* Marquee of the working stack — cheap to render, adds motion and signal. */
+.ticker{
+  margin-top:var(--space-xl);
+  border-block:1px solid var(--border-soft);
+  padding-block:var(--space-xs);
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ticker-track{
+  display:flex; gap:var(--space-m); width:max-content;
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  animation:slide 42s linear infinite;
+}
+.ticker:hover .ticker-track{ animation-play-state:paused; }
+.ticker-track span{ display:inline-flex; align-items:center; gap:var(--space-m); white-space:nowrap; }
+.ticker-track span::after{ content:'/'; color:color-mix(in srgb, var(--accent) 45%, transparent); }
+@keyframes slide{ to{ transform:translateX(-50%); } }
+
+/* ============================================================================
+   5. SECTION SHELL
+   ========================================================================= */
+.section{ padding-block:var(--space-2xl); border-top:1px solid var(--border-soft); }
+
+.section-head{ margin-bottom:var(--space-l); }
+.section-index{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  letter-spacing:.14em; text-transform:uppercase;
+  display:flex; align-items:center; gap:var(--space-xs);
+}
+.section-index::after{
+  content:''; height:1px; flex:1; max-width:120px;
+  background:linear-gradient(90deg, var(--border), transparent);
+}
+.section-head h2{
+  margin-top:var(--space-xs);
+  font-size:var(--step-4); letter-spacing:-0.035em;
+}
+.section-head h2 .accent{ color:var(--accent); }
+.section-head .lede{
+  margin-top:var(--space-s); max-width:var(--measure);
+  color:var(--text-muted); font-size:var(--step-1);
+}
+
+/* ============================================================================
+   6. WORK
+   Projects come before the bio: the work is the evidence, everything else is
+   commentary on it.
+   ========================================================================= */
+.work-list{ display:grid; gap:var(--space-m); }
+
+.project{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:var(--space-m);
+  box-shadow:var(--shadow);
+  transition:transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.project:hover{
+  transform:translateY(-4px);
+  border-color:color-mix(in srgb, var(--accent) 55%, var(--border));
+  box-shadow:var(--shadow-lift);
+}
+
+/* Featured project gets a two-column layout and an accent rail. */
+.project.featured{
+  display:grid; gap:var(--space-l);
+  grid-template-columns:1.15fr .85fr;
+  padding:var(--space-l);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 6%, transparent), transparent 55%),
+    var(--surface);
+}
+.project.featured::before{
+  content:''; position:absolute; inset:0 auto 0 0; width:3px;
+  border-radius:var(--radius) 0 0 var(--radius);
+  background:linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+@media (max-width: 860px){
+  .project.featured{ grid-template-columns:1fr; gap:var(--space-m); }
+}
+
+.project-eyebrow{
+  display:flex; align-items:center; gap:var(--space-xs); flex-wrap:wrap;
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  margin-bottom:var(--space-xs);
+}
+.chip{
+  font-family:var(--mono); font-size:var(--step--1);
+  padding:.2em .7em; border-radius:100px;
+  border:1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  background:color-mix(in srgb, var(--accent) 11%, transparent);
+  color:var(--accent);
+}
+.chip.warm{
+  border-color:color-mix(in srgb, var(--accent-2) 34%, transparent);
+  background:color-mix(in srgb, var(--accent-2) 12%, transparent);
+  color:var(--accent-2);
+}
+
+.project h3{ font-size:var(--step-2); margin-bottom:var(--space-xs); }
+.project .summary{ color:var(--text-muted); max-width:var(--measure); }
+.project .summary + .summary{ margin-top:var(--space-xs); }
+
+/* Spec table: the "context" hiring managers say is usually missing. */
+.spec{
+  margin-top:var(--space-m);
+  font-family:var(--mono); font-size:var(--step--1);
+  border:1px solid var(--border); border-radius:var(--radius-s);
+  overflow:hidden; background:var(--surface-2);
+}
+.spec .row{
+  display:grid; grid-template-columns:7.5rem 1fr; gap:var(--space-s);
+  padding:.7rem var(--space-s);
+  border-bottom:1px solid var(--border-soft);
+}
+.spec .row:last-child{ border-bottom:none; }
+.spec .k{ color:var(--text-dim); }
+.spec .v{ color:var(--text); }
+@media (max-width: 520px){
+  .spec .row{ grid-template-columns:1fr; gap:.15rem; }
+}
+
+.metrics{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(7rem, 1fr));
+  gap:var(--space-s); margin-top:var(--space-m);
+}
+.metric{
+  border:1px solid var(--border); border-radius:var(--radius-s);
+  padding:var(--space-s); background:var(--surface-2);
+}
+.metric .n{
+  font-family:var(--mono); font-size:var(--step-2); font-weight:600;
+  color:var(--accent); letter-spacing:-0.03em; line-height:1.1;
+}
+.metric .l{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  margin-top:.2rem;
+}
+
+.stack{ display:flex; flex-wrap:wrap; gap:.45rem; margin-top:var(--space-m); }
+.stack li{
+  list-style:none;
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-muted);
+  border:1px solid var(--border); border-radius:var(--radius-s);
+  padding:.25em .65em; background:var(--bg-sunk);
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.project:hover .stack li{ border-color:color-mix(in srgb, var(--accent) 28%, var(--border)); }
+
+.project-links{ display:flex; flex-wrap:wrap; gap:var(--space-s); margin-top:var(--space-m); }
+.project-links a{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--accent);
+  display:inline-flex; align-items:center; gap:.4em;
+  border-bottom:1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  padding-bottom:1px; transition:border-color .2s var(--ease);
+}
+.project-links a:hover{ border-bottom-color:var(--accent); }
+.project-links a .arrow{ transition:transform .18s var(--ease); }
+.project-links a:hover .arrow{ transform:translate(2px, -2px); }
+
+.work-grid{
+  display:grid; gap:var(--space-m);
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+}
+
+/* Cards in a row share a height, so pin the links to the bottom edge and let
+   the summary take up the slack. */
+.work-grid .project{ display:flex; flex-direction:column; }
+.work-grid .project .stack{ margin-top:auto; padding-top:var(--space-m); }
+.work-grid .project .project-links{ margin-top:var(--space-s); }
+
+/* ============================================================================
+   7. ABOUT
+   ========================================================================= */
+.about{
+  display:grid; gap:var(--space-l);
+  grid-template-columns:minmax(0, 15rem) minmax(0, 1fr);
+  align-items:start;
+}
+@media (max-width: 760px){
+  .about{ grid-template-columns:1fr; }
+  .portrait{ max-width:16rem; }
+}
+
+.portrait{
+  position:relative; border-radius:var(--radius); overflow:hidden;
+  border:1px solid var(--border); box-shadow:var(--shadow-lift);
+  aspect-ratio:3/4; background:var(--surface-2);
+}
+.portrait img{
+  width:100%; height:100%; object-fit:cover; object-position:center 22%;
+  transition:transform .6s var(--ease);
+}
+.portrait:hover img{ transform:scale(1.045); }
+.portrait::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to top, color-mix(in srgb, var(--bg) 55%, transparent), transparent 45%);
+}
+
+.about-body p{ color:var(--text-muted); max-width:var(--measure); }
+.about-body p + p{ margin-top:var(--space-s); }
+.about-body strong{ color:var(--text); font-weight:600; }
+
+.facts{
+  margin-top:var(--space-m);
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
+  gap:var(--space-s);
+}
+.fact{
+  border:1px solid var(--border); border-radius:var(--radius-s);
+  background:var(--surface); padding:var(--space-s);
+  font-family:var(--mono); font-size:var(--step--1);
+}
+.fact .k{ color:var(--text-dim); display:block; }
+.fact .v{ color:var(--text); display:block; margin-top:.25rem; }
+.fact .v.on{ color:var(--accent); }
+
+/* ============================================================================
+   8. TOOLKIT
+   ========================================================================= */
+.toolkit{
+  display:grid; gap:var(--space-m);
+  grid-template-columns:repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+.tool-group{
+  border:1px solid var(--border); border-radius:var(--radius);
+  background:var(--surface); padding:var(--space-m); box-shadow:var(--shadow);
+  transition:border-color .25s var(--ease), transform .25s var(--ease);
+}
+.tool-group:hover{ border-color:color-mix(in srgb, var(--accent) 45%, var(--border)); transform:translateY(-3px); }
+.tool-group h3{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--accent);
+  text-transform:uppercase; letter-spacing:.12em; font-weight:500;
+  margin-bottom:var(--space-s);
+}
+.tool-group ul{ list-style:none; display:grid; gap:.5rem; }
+.tool-group li{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-muted);
+  display:flex; align-items:baseline; gap:.6em;
+}
+.tool-group li::before{
+  content:''; width:.32em; height:.32em; border-radius:50%;
+  background:color-mix(in srgb, var(--accent) 70%, transparent); flex:none;
+}
+
+/* ============================================================================
+   9. CONTACT + FOOTER
+   ========================================================================= */
+.contact-card{
+  border:1px solid var(--border); border-radius:var(--radius);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 60%),
+    var(--surface);
+  padding:var(--space-l);
+  box-shadow:var(--shadow);
+  display:grid; gap:var(--space-l);
+  grid-template-columns:1.1fr .9fr; align-items:start;
+}
+@media (max-width: 760px){
+  .contact-card{ grid-template-columns:1fr; gap:var(--space-m); }
+}
+.contact-card h3{ font-size:var(--step-3); letter-spacing:-0.035em; }
+.contact-card p{ margin-top:var(--space-xs); color:var(--text-muted); max-width:var(--measure); }
+
+.contact-actions{ margin-top:var(--space-m); display:flex; flex-wrap:wrap; gap:var(--space-xs); }
+
+.copy-mail{ position:relative; }
+.copy-mail[data-copied="true"]{ border-color:var(--accent); color:var(--accent); }
+
+.socials{ display:grid; gap:.4rem; }
+.socials-label{
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  letter-spacing:.12em; text-transform:uppercase; margin-bottom:var(--space-xs);
+}
+.socials a{
+  display:flex; align-items:center; gap:.7em;
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-muted);
+  border:1px solid var(--border); border-radius:var(--radius-s);
+  background:var(--surface-2); padding:.65em .85em;
+  transition:color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.socials a:hover{ color:var(--accent); border-color:var(--accent); transform:translateX(3px); }
+.socials a .ext{ margin-left:auto; color:var(--text-dim); }
+.socials a:hover .ext{ color:var(--accent); }
+.socials svg{ width:1.05em; height:1.05em; flex:none; }
+
+.site-footer{
+  border-top:1px solid var(--border-soft);
+  padding-block:var(--space-m);
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+  display:flex; flex-wrap:wrap; gap:var(--space-s); justify-content:space-between;
+}
+.site-footer a:hover{ color:var(--accent); }
+
+/* ============================================================================
+   10. SCROLL REVEAL
+   ========================================================================= */
+.reveal{
+  opacity:0; transform:translateY(1.4rem);
+  transition:opacity .7s var(--ease), transform .7s var(--ease);
+}
+.reveal.is-visible{ opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; }
+}
+
+/* ============================================================================
+   11. AI CHAT WIDGET
+   ========================================================================= */
+#chat-toggle{
+  position:fixed; right:var(--space-m); bottom:var(--space-m); z-index:95;
+  display:inline-flex; align-items:center; gap:.5em;
+  padding:.8em 1.15em; border-radius:100px; cursor:pointer;
+  background:var(--accent); color:var(--accent-ink); border:none;
+  font-family:var(--mono); font-size:var(--step--1); font-weight:600;
+  box-shadow:0 10px 30px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+  transition:transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+#chat-toggle:hover{ transform:translateY(-2px) scale(1.02); }
+#chat-toggle svg{ width:1.05em; height:1.05em; }
+
+#chat-panel{
+  position:fixed; right:var(--space-m); bottom:calc(var(--space-m) + 3.6rem); z-index:96;
+  width:min(23rem, calc(100vw - 2 * var(--space-m)));
+  height:min(30rem, calc(100vh - 8rem));
+  display:flex; flex-direction:column; overflow:hidden;
+  background:var(--bg); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow-lift);
+  transform-origin:bottom right;
+  animation:panelIn .22s var(--ease);
+}
+#chat-panel[hidden]{ display:none; }
+@keyframes panelIn{ from{ opacity:0; transform:translateY(8px) scale(.97); } }
+
+.chat-head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--space-xs);
+  padding:var(--space-xs) var(--space-s);
+  background:var(--surface-2); border-bottom:1px solid var(--border);
+  font-family:var(--mono); font-size:var(--step--1); color:var(--text-dim);
+}
+.chat-head b{ color:var(--accent); font-weight:600; }
+.chat-head button{ background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:1rem; line-height:1; padding:.2rem; }
+.chat-head button:hover{ color:var(--text); }
+
+#chat-log{
+  flex:1; overflow-y:auto; padding:var(--space-s);
+  display:flex; flex-direction:column; gap:var(--space-xs);
+  font-size:var(--step--1); line-height:1.55;
+  overscroll-behavior:contain;
+}
+.msg{ max-width:90%; padding:.6em .85em; border-radius:var(--radius-s); }
+.msg.bot{ background:var(--surface); border:1px solid var(--border); align-self:flex-start; }
+.msg.user{
+  background:color-mix(in srgb, var(--accent) 15%, transparent);
+  border:1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  color:var(--text); align-self:flex-end;
+}
+.msg.err{
+  background:color-mix(in srgb, #E5484D 12%, transparent);
+  border:1px solid color-mix(in srgb, #E5484D 32%, transparent);
+  color:#F07C80; align-self:flex-start;
+}
+.msg.typing span{
+  display:inline-block; width:.34em; height:.34em; margin-right:.22em;
+  border-radius:50%; background:var(--text-dim);
+  animation:bob 1.1s var(--ease) infinite;
+}
+.msg.typing span:nth-child(2){ animation-delay:.14s; }
+.msg.typing span:nth-child(3){ animation-delay:.28s; }
+@keyframes bob{ 0%,60%,100%{ transform:translateY(0); opacity:.45; } 30%{ transform:translateY(-.3em); opacity:1; } }
+
+.chat-suggest{
+  display:flex; flex-wrap:wrap; gap:.4rem;
+  padding:0 var(--space-s) var(--space-xs);
+}
+.chat-suggest[hidden]{ display:none; }
+.chat-suggest button{
+  font-family:var(--mono); font-size:var(--step--1); cursor:pointer;
+  color:var(--text-muted); background:var(--surface);
+  border:1px solid var(--border); border-radius:100px; padding:.3em .75em;
+  transition:color .2s var(--ease), border-color .2s var(--ease);
+}
+.chat-suggest button:hover{ color:var(--accent); border-color:var(--accent); }
+
+#chat-form{ display:flex; border-top:1px solid var(--border); background:var(--surface); }
+#chat-input{
+  flex:1; min-width:0; background:transparent; border:none; color:var(--text);
+  padding:var(--space-xs) var(--space-s); font-family:var(--mono); font-size:var(--step--1);
+}
+#chat-input::placeholder{ color:var(--text-dim); }
+#chat-input:focus{ outline:none; }
+#chat-form button{
+  background:var(--accent); color:var(--accent-ink); border:none; cursor:pointer;
+  padding-inline:var(--space-s); font-family:var(--mono); font-size:var(--step--1); font-weight:600;
+}
+
+.visually-hidden{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
 </style>
+
+<noscript><style>
+  /* No JS: the reveal animation never runs, so show everything outright. */
+  .reveal{ opacity:1 !important; transform:none !important; }
+  #chat-toggle{ display:none; }
+</style></noscript>
 </head>
 <body>
 
-<header class="site-nav">
-  <div class="nav-inner">
-    <div class="logo">~/tazanu<span class="cursor"></span></div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">menu</button>
-    <nav class="links" id="navLinks">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="shell header-inner">
+    <a class="logo" href="#top" aria-label="Tazanu Stanley — home">~/tazanu<i class="caret" aria-hidden="true"></i></a>
+
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#work">work</a>
       <a href="#about">about</a>
-      <a href="#skills">skills</a>
-      <a href="#projects">projects</a>
+      <a href="#toolkit">toolkit</a>
       <a href="#contact">contact</a>
     </nav>
+
+    <div class="header-tools">
+      <button class="icon-btn" id="themeToggle" aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
 
-<main class="wrap">
+<main id="main">
 
-  <section class="hero" style="border-top:none;">
-    <img src="1760965739354.jpg" alt="" class="hero-bg" aria-hidden="true">
-    <div class="hero-overlay"></div>
-    <div class="hero-inner">
-      <p class="eyebrow reveal delay-1">open to new opportunities</p>
-      <h1 class="reveal delay-2">
-        <span class="kw">const</span> developer <span class="punc">=</span> {<br>
-        &nbsp;&nbsp;name<span class="punc">:</span> <span class="str">"Tazanu Stanley"</span>,<br>
-        &nbsp;&nbsp;role<span class="punc">:</span> <span class="str">"Software &amp; Web Developer"</span>,<br>
-        &nbsp;&nbsp;focus<span class="punc">:</span> <span class="str">"full-stack, dev tools, AI integrations"</span><br>
-        }
-      </h1>
-      <p class="hero-sub reveal delay-3">I build fast, reliable web applications end to end, from
-        backend APIs to interfaces people actually enjoy using. Currently building
-        with TypeScript, React, and Node, and experimenting with LLM-powered features.</p>
-      <div class="hero-cta reveal delay-4">
-        <a href="#projects" class="btn btn-primary">view projects →</a>
-        <a href="#contact" class="btn btn-ghost">get in touch</a>
+  <!-- ====================== HERO ====================== -->
+  <section class="hero" id="top">
+    <div class="shell">
+      <p class="status reveal"><span class="dot" aria-hidden="true"></span> Open to new opportunities</p>
+
+      <h1 class="reveal">Tazanu Stanley</h1>
+      <p class="role reveal">Software &amp; Web Developer</p>
+
+      <p class="pitch reveal">
+        I build full-stack products end to end — from the <strong>PostgreSQL schema</strong> and
+        <strong>real-time API</strong> to the interface people actually use. Right now I'm building
+        <strong>StudyHub</strong>, a peer-to-peer e-learning platform for university students,
+        and wiring machine-learning models into the services around it.
+      </p>
+
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="#work">View selected work <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="ticker reveal" aria-hidden="true">
+      <div class="ticker-track">
+        <span>JavaScript</span><span>TypeScript</span><span>React</span><span>Node.js</span><span>Express</span>
+        <span>PostgreSQL</span><span>Prisma</span><span>Socket.IO</span><span>Python</span><span>Flutter</span>
+        <span>Docker</span><span>Vercel</span>
+        <span>JavaScript</span><span>TypeScript</span><span>React</span><span>Node.js</span><span>Express</span>
+        <span>PostgreSQL</span><span>Prisma</span><span>Socket.IO</span><span>Python</span><span>Flutter</span>
+        <span>Docker</span><span>Vercel</span>
       </div>
     </div>
   </section>
 
-  <section id="about">
-    <p class="section-tag">01</p>
-    <h2 class="section-title">about<span class="punc">()</span></h2>
-    <div class="about-grid">
-      <div class="about-photo-wrap reveal reveal-fade"><img src="1760965739354.jpg" alt="Tazanu Stanley" class="about-photo"></div>
-      <div class="reveal delay-1">
-        <p>I'm a software developer focused on building clean, maintainable products
-          from prototyping an idea to shipping it in production. I care about
-          fast load times, accessible interfaces, and code that the next person
-          (often future-me) can actually read.</p>
-        <p>Outside of client work, I contribute to a couple of open-source tools
-          and I'm currently exploring how small, well-scoped AI features can make
-          software genuinely more useful, not just decorative.</p>
-      </div>
-      <div class="facts reveal delay-2">
-        <div class="row"><span class="k">location</span><span class="v">Remote / Open to relocate</span></div>
-        <div class="row"><span class="k">experience</span><span class="v">4+ years</span></div>
-        <div class="row"><span class="k">stack</span><span class="v">TS · React · Node</span></div>
-        <div class="row"><span class="k">status</span><span class="v">Available for work</span></div>
-      </div>
+  <!-- ====================== WORK ====================== -->
+  <section class="section shell" id="work">
+    <div class="section-head reveal">
+      <p class="section-index">01 — Selected work</p>
+      <h2>Things I've <span class="accent">built</span></h2>
+      <p class="lede">
+        A few projects in depth rather than a long list of demos. Each one lists what
+        problem it solves, how it's put together, and where to see the code.
+      </p>
     </div>
-  </section>
 
-  <section id="skills">
-    <p class="section-tag">02</p>
-    <h2 class="section-title">skills<span class="punc">.ts</span></h2>
-    <div class="skills reveal">
-      <div class="line"><span class="comment">// languages</span></div>
-      <div class="line"><span class="kw">import</span> { <span class="mod">TypeScript, JavaScript, Python, SQL</span> } <span class="kw">from</span> <span class="mod">'languages'</span><span class="punc">;</span></div>
-      <div class="line"><span class="comment">// frontend</span></div>
-      <div class="line"><span class="kw">import</span> { <span class="mod">React, Next.js, Tailwind CSS</span> } <span class="kw">from</span> <span class="mod">'frontend'</span><span class="punc">;</span></div>
-      <div class="line"><span class="comment">// backend</span></div>
-      <div class="line"><span class="kw">import</span> { <span class="mod">Node.js, Express, PostgreSQL, REST, GraphQL</span> } <span class="kw">from</span> <span class="mod">'backend'</span><span class="punc">;</span></div>
-      <div class="line"><span class="comment">// tooling</span></div>
-      <div class="line"><span class="kw">import</span> { <span class="mod">Docker, Git, CI/CD, Vercel, AWS</span> } <span class="kw">from</span> <span class="mod">'tooling'</span><span class="punc">;</span></div>
-    </div>
-  </section>
+    <div class="work-list">
 
-  <section id="projects">
-    <p class="section-tag">03</p>
-    <h2 class="section-title">projects<span class="punc">.map()</span></h2>
-    <div class="projects">
-
-      <div class="card reveal delay-1">
-        <div class="card-tab"><span class="dot"></span> studyhub</div>
-        <div class="card-body">
+      <!-- ---------- FEATURED ---------- -->
+      <article class="project featured reveal">
+        <div>
+          <p class="project-eyebrow">
+            <span class="chip">Flagship</span>
+            <span class="chip warm">In active development</span>
+          </p>
           <h3>StudyHub</h3>
-          <p>A peer to peer e-learning platform where students interact, collaborate, and learn together in real time.</p>
-          <div class="tags"><span class="tag">E-Learning</span><span class="tag">Real-time</span><span class="tag">Vercel</span></div>
-          <div class="card-links"><a href="https://studyhubwebapp.vercel.app" target="_blank">live ↗</a></div>
-        </div>
-      </div>
+          <p class="summary">
+            A peer-to-peer e-learning platform for university students. Students form study
+            groups and chat in real time, book sessions with tutors, ask and answer questions,
+            and buy or share lecture notes.
+          </p>
+          <p class="summary">
+            The hard parts were the money and the trust: payments run through
+            <strong>mobile money</strong> rather than cards, so the backend has its own
+            transaction reconciler and payment-health checks, plus content-quality and
+            uploader-trust scoring to keep the notes marketplace usable.
+          </p>
 
-      <div class="card reveal delay-2">
-        <div class="card-tab"><span class="dot"></span> flowboard</div>
-        <div class="card-body">
-          <h3>Flowboard</h3>
-          <p>A lightweight kanban-style task manager with real-time sync
-            across devices, built to replace a clunky internal spreadsheet.</p>
-          <div class="tags"><span class="tag">React</span><span class="tag">WebSockets</span><span class="tag">Redis</span></div>
-          <div class="card-links"><a href="#">live ↗</a><a href="#">code ↗</a></div>
-        </div>
-      </div>
+          <ul class="stack">
+            <li>Node.js</li><li>Express 5</li><li>PostgreSQL</li><li>Prisma</li>
+            <li>Socket.IO</li><li>JWT</li><li>Cloudinary</li><li>MeSomb</li><li>React</li>
+          </ul>
 
-      <div class="card reveal delay-3">
-        <div class="card-tab"><span class="dot"></span> gateway-cli</div>
-        <div class="card-body">
-          <h3>Gateway CLI</h3>
-          <p>A command-line tool that scaffolds and deploys API gateways
-            with sensible defaults, cutting new-service setup from hours to minutes.</p>
-          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Docker</span><span class="tag">AWS</span></div>
-          <div class="card-links"><a href="#">live ↗</a><a href="#">code ↗</a></div>
+          <div class="project-links">
+            <a href="https://studyhubwebapp.vercel.app" target="_blank" rel="noopener noreferrer">
+              Live site <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="https://github.com/Tazanu/studyhubwebapp" target="_blank" rel="noopener noreferrer">
+              Source <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="card reveal delay-4">
-        <div class="card-tab"><span class="dot"></span> this-site</div>
-        <div class="card-body">
-          <h3>This Portfolio</h3>
-          <p>The site you're on right now, a single-file, dependency-light
-            build with a small AI assistant wired up through a serverless proxy.</p>
-          <div class="tags"><span class="tag">HTML/CSS/JS</span><span class="tag">NVIDIA NIM</span></div>
-          <div class="card-links"><a href="#">code ↗</a></div>
+        <div>
+          <div class="metrics">
+            <div class="metric"><div class="n">25</div><div class="l">data models</div></div>
+            <div class="metric"><div class="n">12</div><div class="l">API modules</div></div>
+            <div class="metric"><div class="n">~6k</div><div class="l">lines, backend</div></div>
+          </div>
+
+          <div class="spec">
+            <div class="row"><span class="k">role</span><span class="v">Solo — design, backend, frontend</span></div>
+            <div class="row"><span class="k">real-time</span><span class="v">Socket.IO group messaging, reactions, read state</span></div>
+            <div class="row"><span class="k">payments</span><span class="v">Mobile money + reconciliation job</span></div>
+            <div class="row"><span class="k">security</span><span class="v">Helmet, rate limiting, honeypot, role guards</span></div>
+            <div class="row"><span class="k">media</span><span class="v">Cloudinary uploads with signed access</span></div>
+          </div>
         </div>
-      </div>
+      </article>
 
+      <!-- ---------- GRID ---------- -->
+      <div class="work-grid">
+
+        <article class="project reveal">
+          <p class="project-eyebrow"><span class="chip">Mobile</span></p>
+          <h3>StudyHub Mobile</h3>
+          <p class="summary">
+            The Flutter build of StudyHub, so students can keep up with their groups and
+            sessions from a phone instead of a laptop — which is how most of them actually study.
+          </p>
+          <ul class="stack"><li>Dart</li><li>Flutter</li><li>REST</li></ul>
+          <div class="project-links">
+            <a href="https://studyhub-elearning.vercel.app" target="_blank" rel="noopener noreferrer">Live <span class="arrow" aria-hidden="true">↗</span></a>
+            <a href="https://github.com/Tazanu/studyhub-elearning" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <p class="project-eyebrow"><span class="chip warm">Machine learning</span></p>
+          <h3>Student Dropout API</h3>
+          <p class="summary">
+            A Python service that puts a trained dropout-risk model behind a REST endpoint,
+            so an application can score a student's risk and flag them for support early
+            instead of after they've already gone quiet.
+          </p>
+          <ul class="stack"><li>Python</li><li>scikit-learn</li><li>REST</li></ul>
+          <div class="project-links">
+            <a href="https://github.com/Tazanu/student-dropout-api" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <p class="project-eyebrow"><span class="chip warm">AI</span></p>
+          <h3>StudyHub AI</h3>
+          <p class="summary">
+            The AI service behind StudyHub — the piece that turns course material and student
+            activity into something useful in the product rather than a chatbot bolted onto the side.
+          </p>
+          <ul class="stack"><li>Python</li><li>LLM APIs</li></ul>
+          <div class="project-links">
+            <a href="https://github.com/Tazanu/studyhubAI" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <p class="project-eyebrow"><span class="chip">You're looking at it</span></p>
+          <h3>This portfolio</h3>
+          <p class="summary">
+            One hand-written HTML file, no framework and no build step, with a small AI assistant
+            wired through a serverless proxy so the API key never reaches the browser.
+            Fluid type scale, light and dark themes, and a ~40&nbsp;KB hero image.
+          </p>
+          <ul class="stack"><li>HTML</li><li>Modern CSS</li><li>Vanilla JS</li><li>Vercel Functions</li></ul>
+          <div class="project-links">
+            <a href="https://github.com/Tazanu/portfolio" target="_blank" rel="noopener noreferrer">Source <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
-  <section id="contact">
-    <p class="section-tag">04</p>
-    <h2 class="section-title">contact<span class="punc">.send()</span></h2>
-    <div class="contact-box reveal">
-      <div>
-        <h2>Let's build something.</h2>
-        <p>Open to full-time roles, contract work, and interesting problems.</p>
+  <!-- ====================== ABOUT ====================== -->
+  <section class="section shell" id="about">
+    <div class="section-head reveal">
+      <p class="section-index">02 — About</p>
+      <h2>Who's <span class="accent">building</span> it</h2>
+    </div>
+
+    <div class="about">
+      <div class="portrait reveal">
+        <picture>
+          <source type="image/webp" srcset="assets/portrait-400.webp 400w, assets/portrait-800.webp 800w"
+                  sizes="(max-width: 760px) 16rem, 15rem">
+          <img src="assets/portrait-800.jpg"
+               srcset="assets/portrait-400.jpg 400w, assets/portrait-800.jpg 800w"
+               sizes="(max-width: 760px) 16rem, 15rem"
+               width="800" height="1096" loading="lazy" decoding="async"
+               alt="Tazanu Stanley working at a laptop">
+        </picture>
       </div>
-      <div class="social">
-        <a href="https://mail.google.com/mail/?view=cm&to=stanleytazanu262@gmail.com" target="_blank">email</a>
-        <a href="https://github.com/Tazanu" target="_blank">github</a>
-        <a href="https://www.linkedin.com/in/tazanu-stanley-7783542a3/" target="_blank">linkedin</a>
+
+      <div class="about-body reveal">
+        <p>
+          I'm a software developer who likes the whole span of a product — deciding what the
+          data should look like, building the API around it, and then making the interface
+          that sits on top feel obvious to use.
+        </p>
+        <p>
+          Most of my recent work has gone into <strong>StudyHub</strong>, and it's taught me
+          more than any tutorial did: what happens when real payments fail halfway, why you
+          need read state on a message table, and how much of "a feature" is actually the
+          error handling around it.
+        </p>
+        <p>
+          I care about <strong>fast load times</strong>, <strong>accessible interfaces</strong>,
+          and code the next person can read. Lately I've been exploring where small,
+          well-scoped AI and ML features genuinely help — the dropout-risk model and the
+          assistant on this page both came out of that.
+        </p>
+
+        <div class="facts">
+          <div class="fact"><span class="k">location</span><span class="v">Remote · open to relocate</span></div>
+          <div class="fact"><span class="k">experience</span><span class="v">4+ years</span></div>
+          <div class="fact"><span class="k">focus</span><span class="v">Full-stack · APIs · AI</span></div>
+          <div class="fact"><span class="k">status</span><span class="v on">Available for work</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== TOOLKIT ====================== -->
+  <section class="section shell" id="toolkit">
+    <div class="section-head reveal">
+      <p class="section-index">03 — Toolkit</p>
+      <h2>What I <span class="accent">work with</span></h2>
+      <p class="lede">Tools I've shipped something real with, not everything I've ever opened.</p>
+    </div>
+
+    <div class="toolkit">
+      <div class="tool-group reveal">
+        <h3>Languages</h3>
+        <ul><li>JavaScript</li><li>TypeScript</li><li>Python</li><li>Dart</li><li>SQL</li></ul>
+      </div>
+      <div class="tool-group reveal">
+        <h3>Frontend</h3>
+        <ul><li>React</li><li>Next.js</li><li>Flutter</li><li>Tailwind CSS</li><li>Modern CSS</li></ul>
+      </div>
+      <div class="tool-group reveal">
+        <h3>Backend</h3>
+        <ul><li>Node.js &amp; Express</li><li>PostgreSQL</li><li>Prisma</li><li>Socket.IO</li><li>REST APIs</li><li>JWT auth</li></ul>
+      </div>
+      <div class="tool-group reveal">
+        <h3>Platform &amp; AI</h3>
+        <ul><li>Vercel</li><li>Docker</li><li>Git &amp; CI/CD</li><li>Cloudinary</li><li>scikit-learn</li><li>LLM APIs</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CONTACT ====================== -->
+  <section class="section shell" id="contact">
+    <div class="section-head reveal">
+      <p class="section-index">04 — Contact</p>
+      <h2>Let's build <span class="accent">something</span></h2>
+    </div>
+
+    <div class="contact-card reveal">
+      <div>
+        <h3>Currently available.</h3>
+        <p>
+          Open to full-time roles, contract work, and problems that are more interesting
+          than they first look. I read every message and reply to all of them.
+        </p>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=stanleytazanu262@gmail.com" target="_blank" rel="noopener noreferrer">
+            Email me <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <button class="btn btn-ghost copy-mail" id="copyMail" data-mail="stanleytazanu262@gmail.com">
+            <span id="copyMailLabel">Copy address</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="socials">
+        <p class="socials-label">Find me at</p>
+        <a href="https://github.com/Tazanu" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+          github.com/Tazanu <span class="ext" aria-hidden="true">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/tazanu-stanley-7783542a3/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn <span class="ext" aria-hidden="true">↗</span>
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&amp;to=stanleytazanu262@gmail.com" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          stanleytazanu262@gmail.com <span class="ext" aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer>© 2026 Tazanu Stanley · built with HTML, CSS, and a little help from an LLM.</footer>
+<footer class="site-footer shell">
+  <span>© <span id="year">2026</span> Tazanu Stanley</span>
+  <span>Hand-written HTML, CSS &amp; JS · no framework</span>
+</footer>
+
 <!-- ============================================================
      AI CHAT WIDGET
-     This calls a serverless proxy at /api/chat (see /api/chat.js)
-     so your NVIDIA API key stays on the server, never in the browser.
+     Calls the serverless proxy at /api/chat so the API key stays
+     on the server and never reaches the browser.
      ============================================================ -->
-<button id="chat-toggle" aria-label="Open chat" aria-expanded="false">?</button>
-<div id="chat-panel" role="dialog" aria-label="Chat with an assistant about Tazanu">
+<button id="chat-toggle" aria-expanded="false" aria-controls="chat-panel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.8L3 20.5l1.4-4.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/>
+  </svg>
+  Ask about me
+</button>
+
+<div id="chat-panel" role="dialog" aria-label="Ask a question about Tazanu" hidden>
   <div class="chat-head">
-    <span><span class="title">ask-tazanu-ai</span> ~/chat</span>
+    <span><b>ask-tazanu</b> · ~/chat</span>
     <button id="chat-close" aria-label="Close chat">✕</button>
   </div>
-  <div id="chat-log">
-    <div class="msg bot">Hi! I can answer questions about Tazanu's background, skills, and projects. Ask me anything.</div>
+  <div id="chat-log" role="log" aria-live="polite">
+    <div class="msg bot">Hi — I can answer questions about Tazanu's background, projects, and stack. What would you like to know?</div>
+  </div>
+  <div class="chat-suggest" id="chatSuggest">
+    <button type="button">What is StudyHub?</button>
+    <button type="button">What's his stack?</button>
+    <button type="button">Is he available?</button>
   </div>
   <form id="chat-form">
-    <input id="chat-input" type="text" placeholder="Ask about Tazanu's work..." autocomplete="off" />
-    <button type="submit">send</button>
+    <label class="visually-hidden" for="chat-input">Your question</label>
+    <input id="chat-input" type="text" placeholder="Ask about Tazanu's work…" autocomplete="off">
+    <button type="submit">Send</button>
   </form>
 </div>
 
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => { if(el.isIntersecting) { el.target.classList.add('visible'); observer.unobserve(el.target); } });
-  }, {threshold: 0.12});
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+(() => {
+  'use strict';
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open);
+  /* ---------- Theme ------------------------------------------------------ */
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+
+  const applyTheme = (theme) => {
+    root.dataset.theme = theme;
+    themeToggle.setAttribute('aria-label',
+      theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  };
+
+  let stored = null;
+  try { stored = localStorage.getItem('theme'); } catch {}
+  applyTheme(stored || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+  themeToggle.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch {}
   });
 
-  // Chat widget
-  const chatToggle = document.getElementById('chat-toggle');
-  const chatPanel = document.getElementById('chat-panel');
-  const chatClose = document.getElementById('chat-close');
-  const chatForm = document.getElementById('chat-form');
-  const chatInput = document.getElementById('chat-input');
-  const chatLog = document.getElementById('chat-log');
+  /* ---------- Mobile nav ------------------------------------------------- */
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const isMobile = () => matchMedia('(max-width: 760px)').matches;
 
-  // EDIT ME: a short profile the assistant uses to answer questions about you.
+  const setNav = (open) => {
+    nav.hidden = !open;
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  const syncNav = () => { nav.hidden = isMobile() ? true : false; };
+
+  syncNav();
+  addEventListener('resize', syncNav);
+  navToggle.addEventListener('click', () => setNav(nav.hidden));
+  nav.addEventListener('click', (e) => { if (e.target.tagName === 'A' && isMobile()) setNav(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && isMobile() && !nav.hidden) setNav(false); });
+
+  /* ---------- Scroll progress + sticky header state ---------------------- */
+  const progress = document.getElementById('progress');
+  const header = document.getElementById('siteHeader');
+  let ticking = false;
+
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    header.dataset.stuck = String(scrollY > 8);
+    ticking = false;
+  };
+  addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- Scroll reveal ---------------------------------------------- */
+  const revealItems = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealItems.forEach(el => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        // Stagger items that come into view together.
+        entry.target.style.transitionDelay = `${Math.min(i * 70, 280)}ms`;
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealItems.forEach(el => io.observe(el));
+  }
+
+  /* ---------- Active section in nav -------------------------------------- */
+  const sections = ['work', 'about', 'toolkit', 'contact']
+    .map(id => document.getElementById(id)).filter(Boolean);
+  const navLinks = new Map(
+    [...nav.querySelectorAll('a')].map(a => [a.getAttribute('href').slice(1), a])
+  );
+
+  const visible = new Set();
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id));
+    navLinks.forEach(a => a.removeAttribute('aria-current'));
+    // Mark the first section still in the band; above them all, mark nothing.
+    const current = sections.find(s => visible.has(s.id));
+    if (current) navLinks.get(current.id)?.setAttribute('aria-current', 'true');
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(s => spy.observe(s));
+
+  /* ---------- Copy email -------------------------------------------------- */
+  const copyBtn = document.getElementById('copyMail');
+  const copyLabel = document.getElementById('copyMailLabel');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyBtn.dataset.mail);
+      copyBtn.dataset.copied = 'true';
+      copyLabel.textContent = 'Copied ✓';
+    } catch {
+      copyLabel.textContent = copyBtn.dataset.mail;
+    }
+    setTimeout(() => {
+      copyBtn.dataset.copied = 'false';
+      copyLabel.textContent = 'Copy address';
+    }, 2200);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- AI chat ----------------------------------------------------- */
+  // EDIT ME: the facts the assistant is allowed to answer from.
   const PROFILE_CONTEXT = `
-You are a helpful assistant embedded on Tazanu Stanley's portfolio website.
-Answer visitor questions about Tazanu using ONLY the facts below. Be concise,
-friendly, and speak in third person about Tazanu. If asked something you
-don't have info on, say you're not sure and suggest they use the contact form.
+You are an assistant embedded on Tazanu Stanley's portfolio website.
+Answer visitor questions about Tazanu using ONLY the facts below. Be concise
+(2-4 sentences), friendly, and speak about Tazanu in the third person. If you
+are asked something the facts don't cover, say you're not sure and point them
+to the contact section.
 
-Facts about Tazanu:
-- Software & web developer, 4+ years experience, remote / open to relocate.
-- Stack: TypeScript, JavaScript, Python, React, Next.js, Node.js, PostgreSQL, Docker, AWS.
-- Projects: Commerce Engine (headless e-commerce backend), Flowboard (real-time
-  kanban task manager), Gateway CLI (API gateway scaffolding tool), and this portfolio site.
-- Interested in full-stack roles, contract work, and AI-integrated products.
-- Available for work now. Contact via email at stanleytazanu262@gmail.com.
+Facts about Tazanu Stanley:
+- Software & web developer, 4+ years experience, remote and open to relocating.
+- Currently available for full-time roles and contract work.
+- Languages: JavaScript, TypeScript, Python, Dart, SQL.
+- Frontend: React, Next.js, Flutter, Tailwind CSS, modern CSS.
+- Backend: Node.js, Express, PostgreSQL, Prisma, Socket.IO, REST APIs, JWT auth.
+- Platform/AI: Vercel, Docker, Git, CI/CD, Cloudinary, scikit-learn, LLM APIs.
+- Flagship project: StudyHub, a peer-to-peer e-learning platform for university
+  students. Real-time study groups over Socket.IO, tutor booking, a Q&A section,
+  and a lecture-notes marketplace. Backend is Express 5 + Prisma + PostgreSQL,
+  around 6,000 lines across 12 route modules and 25 data models. Payments go
+  through mobile money (MeSomb) with a transaction reconciler and payment-health
+  checks; there is also content-quality and uploader-trust scoring.
+  Live at studyhubwebapp.vercel.app.
+- StudyHub Mobile: the Flutter/Dart build of StudyHub.
+- Student Dropout API: a Python service exposing a trained dropout-risk model
+  over REST so students at risk can be supported early.
+- StudyHub AI: the Python AI service behind StudyHub.
+- This portfolio: a single hand-written HTML file, no framework or build step,
+  with this assistant running through a serverless proxy.
+- Contact: stanleytazanu262@gmail.com, github.com/Tazanu, and LinkedIn.
 `.trim();
 
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel  = document.getElementById('chat-panel');
+  const chatClose  = document.getElementById('chat-close');
+  const chatForm   = document.getElementById('chat-form');
+  const chatInput  = document.getElementById('chat-input');
+  const chatLog    = document.getElementById('chat-log');
+  const suggest    = document.getElementById('chatSuggest');
+
   let history = [];
+  let pending = false;
 
-  function openChat(){
-    chatPanel.classList.add('open');
-    chatToggle.setAttribute('aria-expanded', 'true');
-    chatInput.focus();
-  }
-  function closeChat(){
-    chatPanel.classList.remove('open');
-    chatToggle.setAttribute('aria-expanded', 'false');
-  }
-  chatToggle.addEventListener('click', () => {
-    chatPanel.classList.contains('open') ? closeChat() : openChat();
+  const setChat = (open) => {
+    chatPanel.hidden = !open;
+    chatToggle.setAttribute('aria-expanded', String(open));
+    if (open) chatInput.focus();
+  };
+  chatToggle.addEventListener('click', () => setChat(chatPanel.hidden));
+  chatClose.addEventListener('click', () => { setChat(false); chatToggle.focus(); });
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !chatPanel.hidden) { setChat(false); chatToggle.focus(); }
   });
-  chatClose.addEventListener('click', closeChat);
 
-  function addMsg(text, cls){
-    const div = document.createElement('div');
-    div.className = 'msg ' + cls;
-    div.textContent = text;
-    chatLog.appendChild(div);
+  const addMsg = (text, cls) => {
+    const el = document.createElement('div');
+    el.className = 'msg ' + cls;
+    el.textContent = text;
+    chatLog.appendChild(el);
     chatLog.scrollTop = chatLog.scrollHeight;
-    return div;
-  }
+    return el;
+  };
 
-  chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const question = chatInput.value.trim();
-    if(!question) return;
+  const ask = async (question) => {
+    if (!question || pending) return;
+    pending = true;
+    suggest.hidden = true;
     addMsg(question, 'user');
-    chatInput.value = '';
-    history.push({role:'user', content: question});
-    const thinking = addMsg('...', 'bot');
+    history.push({ role: 'user', content: question });
 
-    try{
+    const thinking = document.createElement('div');
+    thinking.className = 'msg bot typing';
+    thinking.innerHTML = '<span></span><span></span><span></span>';
+    chatLog.appendChild(thinking);
+    chatLog.scrollTop = chatLog.scrollHeight;
+
+    try {
       const res = await fetch('/api/chat', {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          system: PROFILE_CONTEXT,
-          messages: history.slice(-8) // keep recent context small
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ system: PROFILE_CONTEXT, messages: history.slice(-8) })
       });
-      if(!res.ok) throw new Error('Request failed (' + res.status + ')');
+      if (!res.ok) throw new Error('Request failed (' + res.status + ')');
       const data = await res.json();
-      thinking.textContent = data.reply || "Sorry, I didn't get a response.";
+      const reply = data.reply || "Sorry, I didn't get a response.";
       thinking.className = 'msg bot';
-      history.push({role:'assistant', content: data.reply || ''});
-    }catch(err){
-      thinking.textContent = 'Chat is not connected yet — this needs the /api/chat backend deployed (see api/chat.js).';
+      thinking.textContent = reply;
+      history.push({ role: 'assistant', content: reply });
+    } catch {
       thinking.className = 'msg err';
+      thinking.textContent = 'The assistant is offline right now — email stanleytazanu262@gmail.com and Tazanu will reply directly.';
+    } finally {
+      pending = false;
+      chatLog.scrollTop = chatLog.scrollHeight;
     }
+  };
+
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = chatInput.value.trim();
+    chatInput.value = '';
+    ask(q);
   });
+
+  suggest.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') ask(e.target.textContent.trim());
+  });
+})();
 </script>
 
 </body>
